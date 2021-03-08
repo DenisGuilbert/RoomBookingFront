@@ -6,6 +6,7 @@ import Rooms  from './components/Rooms/Rooms';
 function App() {
   return (
     <div className="App">
+      <Rooms></Rooms>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
@@ -19,8 +20,7 @@ function App() {
         >
           Learn React
         </a>
-      </header>
-      <Rooms></Rooms>
+      </header>      
     </div>
   );
 }
