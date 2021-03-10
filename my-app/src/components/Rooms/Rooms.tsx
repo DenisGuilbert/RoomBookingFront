@@ -1,8 +1,46 @@
-import * as React from 'react';
+import React, { Component } from 'react';
+import _ from "lodash";
+import { fetchRooms } from '../../actions/RoomActions';
+import { Room } from '../../domain/Room'
+import {RootState} from '../../app/store'
 
-export default class Rooms extends React.Component {
+export interface ListProps {
+  rooms: Room[];
+  fetchRooms: () => any;
+}
 
-  constructor(props) {
+export class Rooms extends Component<ListProps> {
+
+  componentDidMount(): void {
+    this.props.fetchRooms();
+  }
+
+  renderRooms(): JSX.Element[] | null {
+    const { rooms } = this.props;
+    if (!rooms) {
+      return null;
+    }
+    return rooms.map((room: Room) => {
+      return <div key={room.id} className="room">{room.id} - {room.name}</div>;
+    });
+  }
+
+  render() {
+    return <div className="ui rooms">{this.renderRooms()}</div>;
+  }
+}
+
+const mapStateToProps = (state: RootState) => {
+  return {
+      rooms: _.rooms(state.room.items)
+  };
+};
+
+const mapDispatchToProps = {
+  fetchRooms: fetchRooms
+};
+
+  /*constructor(props) {
     super(props);
     this.state = {
       showComponent: false,
@@ -16,45 +54,30 @@ export default class Rooms extends React.Component {
     });
   }
 
-  state = {
+  onButtonClickCallAxios() {
+    console.log('myaxios');
+    fetchRooms();
+  }*/
+
+  /*state = {
     showComponent: false
   };
-
-  /*getUrl() {
-    let rooms = [];
-    axios.get('https://localhost:44387/Rooms')
-      .then(function (response) {
-        //Success here
-        rooms = response.data.map((item, index) => (
-          <tr className="roomLine" key={item.id}>
-            {item.name}
-          </tr>
-        ));
-
-      })
-      .catch(function (error) {
-        console.log('An error has occurred : ' + error);
-      })
-      .then(function () {
-        //Always executed 
-        console.log(rooms);
-        //return rooms;
-      });
-
-    return rooms;
-  }*/
 
   render() {
     return (
       <div className='Rooms'>
         {this.state.showComponent ? <NewComponent /> : null}
-        <button onClick={this.onButtonClick}>Button</button>        
+        <button onClick={this.onButtonClick}>Make a new component to appear</button>
+        <button onClick={this.onButtonClickCallAxios}>Call axios</button>
       </div>
     );
   }
-}
+}*/
 
-class NewComponent extends React.Component {
+
+
+
+/*class NewComponent extends React.Component {
   render() {
 
     const newComponentStyle = {
@@ -62,12 +85,12 @@ class NewComponent extends React.Component {
       backgroundColor: "lightBlue",
       padding: "10px",
       fontFamily: "Arial",
-      fontSize : "30px",
-      height : '50px',
-      border : '1px solid black'
+      fontSize: "30px",
+      height: '50px',
+      border: '1px solid black'
     };
-    return (      
+    return (
       <div style={newComponentStyle}>new component</div>
     );
   }
-}
+}*/

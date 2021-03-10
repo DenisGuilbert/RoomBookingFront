@@ -6,6 +6,7 @@ import { Room } from "../domain/Room";
 
 export function* getRooms() {
     try {
+        console.log('Saga : getRooms()');
         const response: AxiosResponse<Room[]> = yield call(fetchRooms);
         yield put({
             type: RoomActionTypes.FETCH_ROOMS_SUCCESS,

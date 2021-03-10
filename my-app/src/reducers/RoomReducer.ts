@@ -14,7 +14,9 @@ export const RoomReducer: Reducer<RoomState, RoomAction> = (
     action
 ) => {
     switch (action.type) {
+        
         case RoomActionTypes.FETCH_ROOMS_SUCCESS:
+            console.log('in reducer, success');
             return {
                 ...state,
                 items: { ...state.items, ..._.mapKeys(action.payload, "id") },
@@ -22,6 +24,7 @@ export const RoomReducer: Reducer<RoomState, RoomAction> = (
             };
 
         default:
+            console.log('in reducer, default');
             return state;
     }
 };
