@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import {Rooms} from './components/Rooms/Rooms';
+import Rooms from './components/Rooms/Rooms';
 import {Room} from './domain/Room'
 
 function App() {
@@ -9,8 +9,8 @@ function App() {
   
   return (
     <div className="App">
-      <Rooms Rooms={[{id:1, name : 'My room 1'}]}></Rooms>
-      <header className="App-header">
+      <Rooms></Rooms>
+      {/*<header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
@@ -23,7 +23,7 @@ function App() {
         >
           Learn React
         </a>
-      </header>      
+      </header>*/}
     </div>
   );
 }
