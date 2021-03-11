@@ -4,7 +4,11 @@ import {Room} from '../domain/Room'
 export enum RoomActionTypes {
     FETCH_ROOMS = "ROOMS",
     FETCH_ROOMS_SUCCESS = "FETCH_ROOMS_SUCCESS",
-    FETCH_ROOMS_FAIL = "FETCH_ROOMS_FAIL"
+    FETCH_ROOMS_FAIL = "FETCH_ROOMS_FAIL",
+
+    CREATE_ROOM = "CREATE_ROOM",
+    CREATE_ROOM_SUCCESS = "CREATE_ROOM_SUCCESS",
+    CREATE_ROOM_FAIL = "CREATE_ROOM_FAIL",
 }
 
 export interface FetchRooms {
@@ -20,6 +24,19 @@ interface FetchRoomsFail {
     type: RoomActionTypes.FETCH_ROOMS_FAIL;
 }
 
+export interface CreateRoom {
+    type: RoomActionTypes.CREATE_ROOM;
+}
+
+interface CreateRoomSuccess {
+    type: RoomActionTypes.CREATE_ROOM_SUCCESS;
+    //payload: Room;
+}
+
+interface CreateRoomFail {
+    type: RoomActionTypes.CREATE_ROOM_FAIL;
+}
+
 export const fetchRooms = (): FetchRooms => ({
     type: RoomActionTypes.FETCH_ROOMS
 });
@@ -27,4 +44,7 @@ export const fetchRooms = (): FetchRooms => ({
 export type RoomAction =
     | FetchRooms
     | FetchRoomsSuccess
-    | FetchRoomsFail;
+    | FetchRoomsFail
+    | CreateRoom
+    | CreateRoomSuccess
+    | CreateRoomFail;

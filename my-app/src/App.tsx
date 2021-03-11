@@ -3,13 +3,13 @@ import logo from './logo.svg';
 import './App.css';
 import Rooms from './components/Rooms/Rooms';
 import {Room} from './domain/Room'
+import CreateRooms  from './components/Rooms/CreateRoom';
 
-function App() {
-  let rooms= [{id:1, name : 'My room 1'}];
-  
+function App() {  
   return (
     <div className="App">
       <Rooms></Rooms>
+      <CreateRooms></CreateRooms>
       {/*<header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
