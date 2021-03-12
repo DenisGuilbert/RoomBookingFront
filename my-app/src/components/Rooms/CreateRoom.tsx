@@ -17,14 +17,14 @@ export class CreateRooms extends Component<ListProps> {
 
     }
 
+    //TODO DG : I must have made a mapping error...
     handleInputChange = e => {
-        console.log('e.target.value : ' + e.target.value);
+        console.log('e.target.value : ' + e.target.value); //Bug : Write only the last letter wite on keyboard 
     }
 
-    handleSubmitForm = e => {
-        
-        createRoom(this.props.name);
+    handleSubmitButton = e => {        
         e.preventDefault();
+        createRoom(this.props.name); //Doesn't seems to work.
     }
 
     render() {
@@ -45,16 +45,13 @@ export class CreateRooms extends Component<ListProps> {
             border: '1px solid #1d283a'
         };
         return (
-            <div>
-                <div style={divFormStyle}>
-                    <form onSubmit={this.handleSubmitForm}>
-                        Create a room here :
-                        <br />
-                        <label>Name :<input type="text" placeholder="Enter Room's name" name="roomName" value={this.props.name} onChange={this.handleInputChange} style={inputFormStyle} required /></label>
-                        <br />
-                        <input type="submit" value="Create room" style={buttonFormStyle} />
-                    </form>
-                </div>
+            <div style={divFormStyle}>
+                <label>Create a room here :</label>
+                <br />
+                <label>Name :<input type="text" placeholder="Enter Room's name" name="roomName" value={this.props.name} onChange={this.handleInputChange} style={inputFormStyle} required /></label>
+                <br />
+                <button value="Create room" onClick={this.handleSubmitButton} style={buttonFormStyle}>Create room</button>
+
             </div>
         );
     }
