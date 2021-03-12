@@ -11,7 +11,8 @@ export interface CreateRoom {
 export interface RoomState {
     items: Rooms;
     loading: boolean;
-    error: String | null
+    error: String | null;
+    name: string;
 }
 
 export interface CreateRoomState {

@@ -5,11 +5,6 @@ import { RoomState, CreateRoomState } from "../states/RoomState";
 
 const initialState = {
     items: {},
-    loading: false,
-    error: null
-};
-
-const initialStateCreate = {
     name: '',
     loading: false,
     error: null
@@ -29,13 +24,39 @@ export const RoomReducer: Reducer<RoomState, RoomAction> = (
                 loading: false
             };
 
+        case RoomActionTypes.CREATE_ROOM:
+            console.log('in reducer, CREATE');
+            return {
+                ...state,
+                name: state.name,
+                loading: false
+            };
+
+        /*case RoomActionTypes.CREATE_ROOM_SUCCESS:
+            console.log('in reducer, CREATE success');
+            return {
+                ...state,
+                //name: 'ZZZ',
+                name: state.name,
+                loading: false
+            };
+
+        case RoomActionTypes.CREATE_ROOM_FAIL:
+            console.log('in reducer, CREATE fail');
+            return {
+                ...state,
+                //name: 'ZZZ',
+                name: state.name,
+                loading: false
+            };*/
+
         default:
             console.log('in reducer, default');
             return state;
     }
 };
 
-export const CreateRoomReducer: Reducer<CreateRoomState, RoomAction> = (
+/*export const CreateRoomReducer: Reducer<CreateRoomState, RoomAction> = (
     state = initialStateCreate,
     action
 ) => {
@@ -46,7 +67,6 @@ export const CreateRoomReducer: Reducer<CreateRoomState, RoomAction> = (
             console.log('in reducer, CREATE');
             return {
                 ...state,
-                //items: { ...state.items, ..._.mapKeys(action.payload, "id") },
                 //name: 'ZZZ',
                 name: state.name,
                 loading: false
@@ -56,7 +76,6 @@ export const CreateRoomReducer: Reducer<CreateRoomState, RoomAction> = (
             console.log('in reducer, CREATE success');
             return {
                 ...state,
-                //items: { ...state.items, ..._.mapKeys(action.payload, "id") },
                 //name: 'ZZZ',
                 name: state.name,
                 loading: false
@@ -66,7 +85,6 @@ export const CreateRoomReducer: Reducer<CreateRoomState, RoomAction> = (
             console.log('in reducer, CREATE fail');
             return {
                 ...state,
-                //items: { ...state.items, ..._.mapKeys(action.payload, "id") },
                 //name: 'ZZZ',
                 name: state.name,
                 loading: false
@@ -76,4 +94,4 @@ export const CreateRoomReducer: Reducer<CreateRoomState, RoomAction> = (
             console.log('in reducer, CREATE default');
             return state;
     }
-};
+};*/

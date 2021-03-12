@@ -23,6 +23,6 @@ export function* createRoom() {
 export default function* () {
     console.log('Saga : default()');
     yield all([
-        takeLatest(RoomActionTypes.CREATE_ROOM, createRoom)
+        takeLatest(RoomActionTypes.CREATE_ROOM, createRoom),
     ]);
 }
