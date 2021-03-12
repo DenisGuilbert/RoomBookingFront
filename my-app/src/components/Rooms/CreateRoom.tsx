@@ -1,8 +1,8 @@
 import { Component } from 'react';
-import _ from "lodash";
+//import _ from "lodash";
 
-import { fetchRooms } from '../../actions/RoomActions';
-import { Room } from '../../domain/Room'
+//import { fetchRooms } from '../../actions/RoomActions';
+//import { Room } from '../../domain/Room'
 import { RootState } from '../../app/store'
 import { connect } from "react-redux";
 
@@ -17,25 +17,40 @@ export class CreateRooms extends Component<ListProps> {
 
     }
 
-    handleSubmitForm(e) {
-        //alert('The value is: ' + e.roomName);
-        console.log(e);
-        e.preventDefault();
-        
+    handleInputChange = e => {
+        console.log('e.target.value : ' + e.target.value);
+        this.setState({ [this.props.name]: e.target.value });
     }
 
-    render() {        
+    handleSubmitForm = e => {
+        e.preventDefault();
+
+    }
+
+    render() {
         const divFormStyle = {
-            width: '100%',
-            //height: '10%',
+            width: '20%',
+            //height: '100%',
             border: '1px solid black',
-            margin: '0 auto'
+            borderRadius:'5px',
+            margin: '1% 0% 0% 40%',
+            padding: '10px'
         };
-        const inputFormStyle = {
-            marginLeft: '10px',
-        };
+        /*const inputFormStyle = {
+            
+        };*/
         const buttonFormStyle = {
-            border: '1px solid black',
+            backgroundColor:'#7eb3ab',
+            borderRadius: '5px',
+            border: '1px solid #1d283a'
+            /*backgroundColor: '#4CAF50',
+            border: 'none',
+            color: 'white',
+            padding: '15px 32px',
+            textAlign: 'center',
+            textDecoration: 'none',
+            display: 'inline-block',
+            fontSize: '16px'*/
         };
         return (
             <div>
@@ -43,9 +58,9 @@ export class CreateRooms extends Component<ListProps> {
                     <form onSubmit={this.handleSubmitForm}>
                         Create a room here :
                         <br />
-                        <label>Name :<input type="text" className="form-control" placeholder="Enter Room's name" name="roomName"/></label>
+                        <label>Name :<input type="text" className="form-control" placeholder="Enter Room's name" name="roomName" /*value={this.props.name}*/ onChange={this.handleInputChange} required /></label>
                         <br />
-                        <input type="submit" value="Create room"/>
+                        <input type="submit" value="Create room" style={buttonFormStyle} />
                     </form>
                 </div>
             </div>
@@ -55,13 +70,12 @@ export class CreateRooms extends Component<ListProps> {
 
 const mapStateToProps = (state: RootState) => {
     return {
-      //rooms: _.values(state.room.items)
-      name: 'test'
+        //name: ''
     };
-  };
-  
-  const mapDispatchToProps = {
-    //fetchRooms: fetchRooms
-  };
-  
-  export default connect(mapStateToProps, mapDispatchToProps)(CreateRooms);
+};
+
+const mapDispatchToProps = {
+    name: 'testdispatchtoprops'
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreateRooms);

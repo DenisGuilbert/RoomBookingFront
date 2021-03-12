@@ -20,7 +20,7 @@ export const RoomReducer: Reducer<RoomState, RoomAction> = (
     action
 ) => {
     switch (action.type) {
-        
+
         case RoomActionTypes.FETCH_ROOMS_SUCCESS:
             console.log('in reducer, FETCH success');
             return {
@@ -36,22 +36,44 @@ export const RoomReducer: Reducer<RoomState, RoomAction> = (
 };
 
 export const CreateRoomReducer: Reducer<CreateRoomState, RoomAction> = (
-    
     state = initialStateCreate,
     action
 ) => {
+    console.log('createroomreducer, state.name : ' + state.name);
     switch (action.type) {
-        
+
+        case RoomActionTypes.CREATE_ROOM:
+            console.log('in reducer, CREATE');
+            return {
+                ...state,
+                //items: { ...state.items, ..._.mapKeys(action.payload, "id") },
+                //name: 'ZZZ',
+                name: state.name,
+                loading: false
+            };
+
         case RoomActionTypes.CREATE_ROOM_SUCCESS:
             console.log('in reducer, CREATE success');
             return {
-                /*...state,
-                items: { ...state.items, ..._.mapKeys(action.payload, "id") },
-                loading: false*/
+                ...state,
+                //items: { ...state.items, ..._.mapKeys(action.payload, "id") },
+                //name: 'ZZZ',
+                name: state.name,
+                loading: false
+            };
+
+        case RoomActionTypes.CREATE_ROOM_FAIL:
+            console.log('in reducer, CREATE fail');
+            return {
+                ...state,
+                //items: { ...state.items, ..._.mapKeys(action.payload, "id") },
+                //name: 'ZZZ',
+                name: state.name,
+                loading: false
             };
 
         default:
-            console.log('in reducer, default');
+            console.log('in reducer, CREATE default');
             return state;
     }
 };
