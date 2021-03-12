@@ -5,13 +5,23 @@ import { createRoom } from '../../actions/RoomActions';
 //import { Room } from '../../domain/Room'
 import { RootState } from '../../app/store'
 import { connect } from "react-redux";
+import { debug } from 'node:console';
 
 export interface ListProps {
     name: string;
-    createRoom: (name) => any;
+    createRoom: (name: string) => any;
 }
 
-export class CreateRooms extends Component<ListProps> {
+export interface ListState {
+    name: string;
+}
+
+export class CreateRooms extends Component<ListProps, ListState> {
+
+    constructor(props : /*readonly<ListProps>*/ ListProps) {
+        super(props);
+        this.state = { name: props.name };
+    }
 
     componentDidMount(): void {
 
@@ -20,11 +30,11 @@ export class CreateRooms extends Component<ListProps> {
     //TODO DG : I must have made a mapping error...
     handleInputChange = e => {
         console.log('e.target.value : ' + e.target.value); //Bug : Write only the last letter wite on keyboard 
+        this.setState({name: e.target.value});
     }
 
     handleSubmitButton = e => {        
-        e.preventDefault();
-        createRoom(this.props.name); //Doesn't seems to work.
+        createRoom(this.state.name); //Doesn't seems to work.
     }
 
     render() {
@@ -37,7 +47,7 @@ export class CreateRooms extends Component<ListProps> {
             padding: '10px'
         };
         const inputFormStyle = {
-            borderRadius: '3px',
+            //borderRadius: '3px',
         };
         const buttonFormStyle = {
             backgroundColor: '#7eb3ab',
@@ -48,7 +58,7 @@ export class CreateRooms extends Component<ListProps> {
             <div style={divFormStyle}>
                 <label>Create a room here :</label>
                 <br />
-                <label>Name :<input type="text" placeholder="Enter Room's name" name="roomName" value={this.props.name} onChange={this.handleInputChange} style={inputFormStyle} required /></label>
+                <label>Name :<input type="text" placeholder="Enter Room's name" value={this.state.name} onChange={this.handleInputChange} style={inputFormStyle} /*required*/ /></label>
                 <br />
                 <button value="Create room" onClick={this.handleSubmitButton} style={buttonFormStyle}>Create room</button>
 

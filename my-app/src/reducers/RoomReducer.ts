@@ -17,7 +17,6 @@ export const RoomReducer: Reducer<RoomState, RoomAction> = (
     switch (action.type) {
 
         case RoomActionTypes.FETCH_ROOMS_SUCCESS:
-            console.log('in reducer, FETCH success');
             return {
                 ...state,
                 items: { ...state.items, ..._.mapKeys(action.payload, "id") },
@@ -25,15 +24,15 @@ export const RoomReducer: Reducer<RoomState, RoomAction> = (
             };
 
         case RoomActionTypes.CREATE_ROOM:
-            console.log('in reducer, CREATE');
+            console.log('in reducer, CREATE ROOM');
             return {
                 ...state,
                 name: state.name,
                 loading: false
             };
 
-        /*case RoomActionTypes.CREATE_ROOM_SUCCESS:
-            console.log('in reducer, CREATE success');
+        case RoomActionTypes.CREATE_ROOM_SUCCESS:
+            console.log('in reducer, CREATE ROOM SUCCESS');
             return {
                 ...state,
                 //name: 'ZZZ',
@@ -41,8 +40,7 @@ export const RoomReducer: Reducer<RoomState, RoomAction> = (
                 loading: false
             };
 
-        case RoomActionTypes.CREATE_ROOM_FAIL:
-            console.log('in reducer, CREATE fail');
+        /*case RoomActionTypes.CREATE_ROOM_FAIL:
             return {
                 ...state,
                 //name: 'ZZZ',
