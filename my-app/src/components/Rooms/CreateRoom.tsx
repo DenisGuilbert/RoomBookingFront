@@ -12,14 +12,14 @@ export interface ListProps {
 
 export interface ListState {
     name: string;
-    creationStatus: boolean;
+    //creationStatus: boolean;
 }
 
 export class CreateRooms extends Component<ListProps, ListState> {
 
     constructor(props: ListProps) {
         super(props);
-        this.state = { name: props.name, creationStatus: props.creationStatus };
+        this.state = { name: props.name/*, creationStatus: props.creationStatus */};
     }
 
     componentDidMount(): void {
@@ -60,8 +60,8 @@ export class CreateRooms extends Component<ListProps, ListState> {
                 <label>Create a room here :</label>
                 <br />
                 <label>Name :<input type="text" placeholder="Enter Room's name" value={this.state.name} onChange={this.handleInputChange} style={inputFormStyle} /*required*/ /></label>
-                <br/>                
-                { this.state.creationStatus && <label style={labelSuccess}>The room was successfully created</label> }
+                <br/>
+                { this.props.creationStatus && (<label style={labelSuccess}>The room was successfully created</label>) }
                 <br/>
                 <button value="Create room" onClick={this.handleSubmitButton} style={buttonFormStyle}>Create room</button>    
             </div>
