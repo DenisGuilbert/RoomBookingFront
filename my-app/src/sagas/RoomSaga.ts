@@ -4,7 +4,7 @@ import { all, call, put, takeLatest } from "redux-saga/effects";
 import { AxiosResponse } from "axios";
 import { Room } from "../domain/Room";
 
-export function* getRooms() {
+export function* getRoomsSaga() {
     try {
         console.log('Saga : getRooms()');
         const response: AxiosResponse<Room[]> = yield call(fetchRooms);
@@ -19,12 +19,16 @@ export function* getRooms() {
     }
 }
 
-export function* createRoom(action:ActionCreateRoom) {
+export function* createRoomSaga(action: ActionCreateRoom) {
     try {
         //Here action.payload = name
         console.log('Saga : createRoom()');
         const response: AxiosResponse<void> = yield call(create, action.payload);
-        console.log(response);
+
+        if (response.status != 200) {
+            throw new Error('The room\'s creation has failed.');
+        }
+
         yield put({
             type: RoomActionTypes.CREATE_ROOM_SUCCESS,
             payload: action.payload
@@ -38,7 +42,7 @@ export function* createRoom(action:ActionCreateRoom) {
 
 export default function* () {
     yield all([
-        takeLatest(RoomActionTypes.FETCH_ROOMS, getRooms),
-        takeLatest(RoomActionTypes.CREATE_ROOM, createRoom)
+        takeLatest(RoomActionTypes.FETCH_ROOMS, getRoomsSaga),
+        takeLatest(RoomActionTypes.CREATE_ROOM, createRoomSaga)
     ]);
 }
