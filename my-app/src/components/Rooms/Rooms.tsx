@@ -19,7 +19,7 @@ export class Rooms extends Component<ListProps> {
   renderRooms(): JSX.Element[] | null {
     const { rooms } = this.props;
     const tdRoomStyle = {
-      'border-bottom': '1px solid black',
+      borderBottom: '1px solid black',
        height: 'auto'
     };
     const trRoomStyle = {

@@ -1,8 +1,8 @@
 import { RoomAction, RoomActionTypes, CreateRoom as ActionCreateRoom } from "../actions/RoomActions";
-import { fetchRooms } from "../api/RoomApi";
+import { fetchRooms, createRoom as create } from "../api/RoomApi";
 import { all, call, put, takeLatest } from "redux-saga/effects";
 import { AxiosResponse } from "axios";
-import { CreateRoom, Room } from "../domain/Room";
+import { Room } from "../domain/Room";
 
 export function* getRooms() {
     try {
@@ -21,17 +21,18 @@ export function* getRooms() {
 
 export function* createRoom(action:ActionCreateRoom) {
     try {
-        //ici, action.payload vaut name
+        //Here action.payload = name
         console.log('Saga : createRoom()');
-        const response: AxiosResponse<Room[]> = yield call(createRoom);
+        const response: AxiosResponse<void> = yield call(create, action.payload);
+        console.log(response);
         yield put({
             type: RoomActionTypes.CREATE_ROOM_SUCCESS,
             payload: action.payload
         });
     } catch (e) {
-        /*yield put({
+        yield put({
             type: RoomActionTypes.CREATE_ROOM_FAIL
-        });*/
+        });
     }
 }
 

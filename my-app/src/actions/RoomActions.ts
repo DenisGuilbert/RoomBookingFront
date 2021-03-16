@@ -1,11 +1,10 @@
-import {Room} from '../domain/Room'
+import { Room } from '../domain/Room'
 
 //Commands to winteract with state
 export enum RoomActionTypes {
     FETCH_ROOMS = "ROOMS",
     FETCH_ROOMS_SUCCESS = "FETCH_ROOMS_SUCCESS",
     FETCH_ROOMS_FAIL = "FETCH_ROOMS_FAIL",
-
     CREATE_ROOM = "CREATE_ROOM",
     CREATE_ROOM_SUCCESS = "CREATE_ROOM_SUCCESS",
     CREATE_ROOM_FAIL = "CREATE_ROOM_FAIL",
@@ -42,7 +41,7 @@ export const fetchRooms = (): FetchRooms => ({
     type: RoomActionTypes.FETCH_ROOMS
 });
 
-export const createRoom = (name): CreateRoom => ({
+export const createRoom = (name: string): CreateRoom => ({
     type: RoomActionTypes.CREATE_ROOM,
     payload: name
 });

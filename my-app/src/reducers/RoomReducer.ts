@@ -1,7 +1,7 @@
 import _ from "lodash";
 import { RoomAction, RoomActionTypes } from "../actions/RoomActions";
 import { Reducer } from "redux";
-import { RoomState, CreateRoomState } from "../states/RoomState";
+import { RoomState } from "../states/RoomState";
 
 const initialState = {
     items: {},
@@ -35,61 +35,20 @@ export const RoomReducer: Reducer<RoomState, RoomAction> = (
             console.log('in reducer, CREATE ROOM SUCCESS');
             return {
                 ...state,
-                //name: 'ZZZ',
-                name: state.name,
-                loading: false
-            };
-
-        /*case RoomActionTypes.CREATE_ROOM_FAIL:
-            return {
-                ...state,
-                //name: 'ZZZ',
-                name: state.name,
-                loading: false
-            };*/
-
-        default:
-            console.log('in reducer, default');
-            return state;
-    }
-};
-
-/*export const CreateRoomReducer: Reducer<CreateRoomState, RoomAction> = (
-    state = initialStateCreate,
-    action
-) => {
-    console.log('createroomreducer, state.name : ' + state.name);
-    switch (action.type) {
-
-        case RoomActionTypes.CREATE_ROOM:
-            console.log('in reducer, CREATE');
-            return {
-                ...state,
-                //name: 'ZZZ',
-                name: state.name,
-                loading: false
-            };
-
-        case RoomActionTypes.CREATE_ROOM_SUCCESS:
-            console.log('in reducer, CREATE success');
-            return {
-                ...state,
-                //name: 'ZZZ',
                 name: state.name,
                 loading: false
             };
 
         case RoomActionTypes.CREATE_ROOM_FAIL:
-            console.log('in reducer, CREATE fail');
+            console.log('in reducer, CREATE ROOM SUCCESS');
             return {
                 ...state,
-                //name: 'ZZZ',
                 name: state.name,
                 loading: false
             };
 
         default:
-            console.log('in reducer, CREATE default');
+            console.log('in reducer, default : ' + action.type);
             return state;
     }
-};*/
+};

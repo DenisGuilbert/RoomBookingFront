@@ -1,8 +1,5 @@
 import { Component } from 'react';
-//import _ from "lodash";
 import { createRoom } from '../../actions/RoomActions';
-//import { fetchRooms } from '../../actions/RoomActions';
-//import { Room } from '../../domain/Room'
 import { RootState } from '../../app/store'
 import { connect } from "react-redux";
 import { debug } from 'node:console';
@@ -27,27 +24,26 @@ export class CreateRooms extends Component<ListProps, ListState> {
 
     }
 
-    //TODO DG : I must have made a mapping error...
     handleInputChange = e => {
-        console.log('e.target.value : ' + e.target.value); //Bug : Write only the last letter wite on keyboard 
+        //console.log('e.target.value : ' + e.target.value);
         this.setState({name: e.target.value});
     }
 
     handleSubmitButton = e => {        
-        createRoom(this.state.name); //Doesn't seems to work.
+        createRoom(this.state.name);
     }
 
     render() {
         const divFormStyle = {
             width: '20%',
             //height: '100%',
-            border: '1px solid black',
+            border: '1px solid grey',
             borderRadius: '5px',
             margin: '1% 0% 0% 40%',
             padding: '10px'
         };
         const inputFormStyle = {
-            //borderRadius: '3px',
+            
         };
         const buttonFormStyle = {
             backgroundColor: '#7eb3ab',
@@ -73,7 +69,7 @@ const mapStateToProps = (state: RootState) => {
     };
 };
 
-const mapDispatchToProps = { //evenements
+const mapDispatchToProps = { //Events
     createRoom: createRoom
 };
 
