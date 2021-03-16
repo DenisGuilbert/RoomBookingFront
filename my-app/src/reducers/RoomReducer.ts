@@ -14,6 +14,9 @@ export const RoomReducer: Reducer<RoomState, RoomAction> = (
     state = initialState,
     action
 ) => {
+
+    console.log('RoomReducer. action.type : ' + action.type);
+
     switch (action.type) {
 
         case RoomActionTypes.FETCH_ROOMS_SUCCESS:

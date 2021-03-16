@@ -15,7 +15,7 @@ export interface ListState {
 
 export class CreateRooms extends Component<ListProps, ListState> {
 
-    constructor(props : /*readonly<ListProps>*/ ListProps) {
+    constructor(props: ListProps) {
         super(props);
         this.state = { name: props.name };
     }
@@ -26,11 +26,11 @@ export class CreateRooms extends Component<ListProps, ListState> {
 
     handleInputChange = e => {
         //console.log('e.target.value : ' + e.target.value);
-        this.setState({name: e.target.value});
+        this.setState({ name: e.target.value });
     }
 
-    handleSubmitButton = e => {        
-        createRoom(this.state.name);
+    handleSubmitButton = e => {
+        this.props.createRoom(this.state.name);
     }
 
     render() {
@@ -43,7 +43,7 @@ export class CreateRooms extends Component<ListProps, ListState> {
             padding: '10px'
         };
         const inputFormStyle = {
-            
+
         };
         const buttonFormStyle = {
             backgroundColor: '#7eb3ab',
