@@ -54,7 +54,7 @@ export class CreateRooms extends Component<ListProps, ListState> {
         };
         const labelSuccess = {
             color: 'green'
-        }
+        };
         return (
             <div style={divFormStyle}>
                 <label>Create a room here :</label>

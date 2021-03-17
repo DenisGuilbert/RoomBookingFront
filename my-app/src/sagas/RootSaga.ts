@@ -1,7 +1,9 @@
 import Room from "./RoomSaga";
+import Booking from "./BookingSaga";
 
 const sagas = [
-    Room
+    Room,
+    Booking
 ];
 
 export const initSagas = (sagaMiddleware: any) =>
