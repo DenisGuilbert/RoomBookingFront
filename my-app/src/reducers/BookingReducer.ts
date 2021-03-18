@@ -5,6 +5,8 @@ import { BookingState } from "../states/BookingState";
 
 const initialState = {
     items: {},
+    idRoom: 0,
+    date: new Date(),
     creationStatus: false,
     loading: false,
     error: null
@@ -19,6 +21,9 @@ export const BookingReducer: Reducer<BookingState, BookingAction> = (
         case BookingActionTypes.FETCH_BOOKINGS:
             return {
                 ...state,
+                idRoom: state.idRoom,
+                date: state.date,
+                creationStatus: false,
                 loading: false
             };
 
@@ -30,7 +35,6 @@ export const BookingReducer: Reducer<BookingState, BookingAction> = (
             };
 
         default:
-            console.log('in booking\'s reducer, default : ' + action.type);
             return state;
     }
 };

@@ -11,6 +11,8 @@ export interface CreateBooking {
 export interface BookingState {
     items: Bookings;
     loading: boolean;
+    date: Date;
+    idRoom: number;
     error: String | null;
     creationStatus: Boolean;
 }

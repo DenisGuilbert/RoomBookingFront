@@ -54,7 +54,7 @@ export class Rooms extends Component<ListProps> {
       borderBottom: '1px solid black',
        height: 'auto'
     };
-    return <div style={divRoomStyle}> <table style={tableRoomStyle}><th style={thRoomStyle}>The room's list :</th>{this.renderRooms()}</table></div>;
+    return <div style={divRoomStyle}> <table style={tableRoomStyle}><thead style={thRoomStyle}>The room's list :</thead><tbody>{this.renderRooms()}</tbody></table></div>;
   }
 }
 

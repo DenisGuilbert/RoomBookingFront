@@ -19,6 +19,7 @@ const rootReducer = combineReducers<RootState>({
     booking: BookingReducer
 });
 
+//export type RootActions = RoomAction | BookingAction;
 export type RootActions = RoomAction | BookingAction;
 
 const sagaMiddleware = createSagaMiddleware();
