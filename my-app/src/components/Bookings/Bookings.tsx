@@ -25,15 +25,15 @@ export class Bookings extends Component<ListProps, ListState> {
     }
 
     componentDidMount(): void {
-        this.props.fetchBookingsForDateAndRoom(/*this.state.idRoom, this.state.date*/1, new Date('2021-03-04'));//test
+        //this.props.fetchBookingsForDateAndRoom(/*this.state.idRoom, this.state.date*/1, new Date('2021-03-04'));//test
         document.getElementById('inputDateBooking')
     }
 
     renderBookings(): JSX.Element[] | null {
         const { bookings } = this.props;
         const tdBookingStyle = {
-            border: '1px solid black',
-            //borderBottom: '1px solid black',
+            //border: '1px solid black',
+            borderBottom: '1px solid black',
             //height: 'auto'
         };
         const trBookingStyle = {
@@ -43,24 +43,55 @@ export class Bookings extends Component<ListProps, ListState> {
             return null;
         }
         return bookings.map((booking: Booking) => {
-            return <tr style={trBookingStyle}><td style={tdBookingStyle} key={booking.id}>{booking.date} : {booking.startSlot}-{booking.endSlot}</td></tr>;
+            return (<tr style={trBookingStyle}>
+                <td style={tdBookingStyle}>{booking.id}</td>
+                <td style={tdBookingStyle}>{booking.roomId}</td>
+                <td style={tdBookingStyle}>{booking.userId}</td>
+                <td style={tdBookingStyle}>{booking.startSlot}</td>
+                <td style={tdBookingStyle}>{booking.endSlot}</td>
+                <td style={tdBookingStyle}>{booking.date.toDateString}</td>
+            </tr>);
         });
+    }
+
+    handleInputDateChange = e => {
+        this.setState({ date: e.target.value });
+    }
+
+    handleInputRoomIdChange = e => {
+        this.setState({ idRoom: e.target.value });
+    }
+
+    handleButtonClick = e => {
+        this.props.fetchBookingsForDateAndRoom(/*this.state.idRoom, this.state.date*/this.state.idRoom, new Date('2020-10-23'));//test
     }
 
     render() {
         const divBookingStyle = {
             padding: '10px 0px 10px 0px', //Top right bottom left
             margin: '10px auto auto auto',
-            width: '20%',
+            //width: '20%',
+            minWidth: '20%',
+            width: 'min-content',
             height: '100%',
             borderRadius: '5px',
             border: '1px solid grey',
         };
         const tableBookingStyle = {
-            border: '1px solid black',
+            border: '1px solid grey',
+            borderRadius: '5px',
             margin: 'auto',
             borderSpacing: '4px'
         };
+        const tableBookingListStyle = {
+            //border: '1px solid black',
+            margin: '10px auto auto auto',
+            borderSpacing: '0px',
+            width: '600px'
+        };
+        const thBookingStyle = {
+            borderBottom: '1px solid black',
+        }
         const tdBookingStyleLeft = {
             width: '50%',
             paddingRight: '5px',
@@ -75,43 +106,52 @@ export class Bookings extends Component<ListProps, ListState> {
             width: '40px',
         };
         const buttonFormStyle = {
-            backgroundColor: '#7eb3ab',
+            //backgroundColor: '#7eb3ab',
+            background: 'linear-gradient(0.25turn, #A9A9A9, #808080)',
             borderRadius: '5px',
             border: '1px solid #1d283a'
         };
 
         return <div style={divBookingStyle}>
             <table style={tableBookingStyle}>
-                <tr>
-                    <td style={tdBookingStyleLeft}><label>Booking date : </label></td>
-                    <td style={tdBookingStyleRight}><input type="date" id='inputDateBooking' /></td></tr>
-                <tr>
-                    <td style={tdBookingStyleLeft}><label>Starting slot : </label></td>
-                    <td style={tdBookingStyleRight}><input id='minSlotInput' type='number' min='0' max='23' defaultValue='10' style={inputNumberBookingStyle} required /></td>
-                </tr>
-                <tr>
-                    <td style={tdBookingStyleLeft}><label>Ending slot : </label></td>
-                    <td style={tdBookingStyleRight}><input id='maxSlotInput' type='number' min='0' max='23' defaultValue='17' style={inputNumberBookingStyle} required /></td>
-                </tr>
-                <tr>
-                    <td style={tdBookingStyleLeft}><label>Room's ID : </label></td>
-                    <td style={tdBookingStyleRight}><input id='roomId' type='number' min='1' defaultValue='1' style={inputNumberBookingStyle} required /></td>
-                </tr>
-                <tr>
-                    <td colSpan={2}><input type='submit' value='Check the bookings' style={buttonFormStyle} /></td>
-                </tr>
-
-            </table>
-
-
-            <table style={tableBookingStyle}>
-                <thead></thead>
                 <tbody>
-                {this.renderBookings()}</tbody>
+                    <tr>
+                        <td style={tdBookingStyleLeft}><label>Booking date : </label></td>
+                        <td style={tdBookingStyleRight}><input type="date" id='inputDateBooking' onChange={this.handleInputDateChange}/></td>
+                    </tr>
+                    {/*<tr>
+                        <td style={tdBookingStyleLeft}><label>Starting slot : </label></td>
+                        <td style={tdBookingStyleRight}><input id='minSlotInput' type='number' min='0' max='23' defaultValue='10' style={inputNumberBookingStyle} required /></td>
+                    </tr>
+                    <tr>
+                        <td style={tdBookingStyleLeft}><label>Ending slot : </label></td>
+                        <td style={tdBookingStyleRight}><input id='maxSlotInput' type='number' min='0' max='23' defaultValue='17' style={inputNumberBookingStyle} required /></td>
+                    </tr>*/}
+                    <tr>
+                        <td style={tdBookingStyleLeft}><label>Room's ID : </label></td>
+                        <td style={tdBookingStyleRight}><input id='roomId' type='number' min='1' defaultValue='1' onChange={this.handleInputRoomIdChange} style={inputNumberBookingStyle} required /></td>
+                    </tr>
+                    <tr>
+                        <td colSpan={2}><button style={buttonFormStyle} onClick={this.handleButtonClick}>Check the bookings</button></td>
+                    </tr>
+                </tbody>
             </table>
 
-
-
+            <table style={tableBookingListStyle}>
+                <thead>
+                    <tr>
+                        <th style={thBookingStyle}><label>Id :</label></th>
+                        <th style={thBookingStyle}><label>Room Id :</label></th>
+                        <th style={thBookingStyle}><label>User Id :</label></th>
+                        <th style={thBookingStyle}><label>Start slot :</label></th>
+                        <th style={thBookingStyle}><label>End slot :</label></th>
+                        <th style={thBookingStyle}><label>Date :</label></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {this.renderBookings()}
+                </tbody>
+            </table>
         </div >;
 
     }

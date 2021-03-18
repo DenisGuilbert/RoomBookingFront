@@ -74,7 +74,8 @@ export class CreateRooms extends Component<ListProps, ListState> {
             color: 'green'
         };
         const buttonFormStyle = {
-            backgroundColor: '#7eb3ab',
+            //backgroundColor: '#7eb3ab',
+            background: 'linear-gradient(0.25turn, #A9A9A9, #808080)',
             borderRadius: '5px',
             border: '1px solid #1d283a'
         };
@@ -84,25 +85,27 @@ export class CreateRooms extends Component<ListProps, ListState> {
         return (
             <div style={divFormStyle}>
                 <table style={tableRoomStyle}>
-                    <tr>
-                        <td colSpan={2}>
-                            <label>Create a room here :</label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style={tdRoomStyleLeft}>
-                            <label>Name :</label>
-                        </td>
-                        <td style={tdRoomStyleRight}>
-                            <input type="text" placeholder="Enter Room's name" value={this.state.name} onChange={this.handleInputChange} style={inputFormStyle} required />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colSpan={2}>{this.props.creationStatus && (<label style={labelSuccess}>The room was successfully created</label>)}</td>
-                    </tr>
-                    <tr>
-                        <td colSpan={2}><input type='submit' value="Create room" onClick={this.handleSubmitButton} style={buttonFormStyle} /></td>
-                    </tr>
+                    <tbody>
+                        <tr>
+                            <td colSpan={2}>
+                                <label>Create a room here :</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style={tdRoomStyleLeft}>
+                                <label>Name :</label>
+                            </td>
+                            <td style={tdRoomStyleRight}>
+                                <input type="text" placeholder="Enter Room's name" value={this.state.name} onChange={this.handleInputChange} style={inputFormStyle} required />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colSpan={2}>{this.props.creationStatus && (<label style={labelSuccess}>The room was successfully created</label>)}</td>
+                        </tr>
+                        <tr>
+                            <td colSpan={2}><input type='submit' value="Create room" onClick={this.handleSubmitButton} style={buttonFormStyle} /></td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
         );
