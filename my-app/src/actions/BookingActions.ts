@@ -5,9 +5,7 @@ export enum BookingActionTypes {
     FETCH_BOOKINGS = "BOOKINGS",
     FETCH_BOOKINGS_SUCCESS = "FETCH_BOOKINGS_SUCCESS",
     FETCH_BOOKINGS_FAIL = "FETCH_BOOKINGS_FAIL",
-
 }
-
 
 export interface FetchBookings {
     type: BookingActionTypes.FETCH_BOOKINGS;

@@ -13,6 +13,7 @@ export interface ListProps {
 }
 
 export interface ListState {
+    bookings: Booking[];
     idRoom: number;
     date: Date;
 }
@@ -21,12 +22,11 @@ export class Bookings extends Component<ListProps, ListState> {
 
     constructor(props: ListProps) {
         super(props);
-        this.state = { idRoom: props.idRoom, date: props.date };
+        this.state = { bookings: props.bookings, idRoom: props.idRoom, date: props.date };
     }
 
     componentDidMount(): void {
-        //this.props.fetchBookingsForDateAndRoom(/*this.state.idRoom, this.state.date*/1, new Date('2021-03-04'));//test
-        document.getElementById('inputDateBooking')
+        //this.props.fetchBookingsForDateAndRoom(/*this.state.idRoom, this.state.date*/1, new Date('2021-03-04'));//test, this is ok
     }
 
     renderBookings(): JSX.Element[] | null {
@@ -55,15 +55,19 @@ export class Bookings extends Component<ListProps, ListState> {
     }
 
     handleInputDateChange = e => {
-        this.setState({ date: e.target.value });
+        //this.setState({ date: e.target.value });
+        this.setState({ date: new Date('2021-03-04') });
+        //console.log('After setState : ' + this.state.date);
     }
 
     handleInputRoomIdChange = e => {
-        this.setState({ idRoom: e.target.value });
+        //this.setState({ idRoom: e.target.value });
+        this.setState({ idRoom: 1 });
+        //console.log('After setState : ' + this.state.idRoom);
     }
 
     handleButtonClick = e => {
-        this.props.fetchBookingsForDateAndRoom(/*this.state.idRoom, this.state.date*/this.state.idRoom, new Date('2020-10-23'));//test
+        this.props.fetchBookingsForDateAndRoom(/*this.state.idRoom, this.state.date*/this.state.idRoom, this.state.date);//test
     }
 
     render() {
@@ -91,7 +95,7 @@ export class Bookings extends Component<ListProps, ListState> {
         };
         const thBookingStyle = {
             borderBottom: '1px solid black',
-        }
+        };
         const tdBookingStyleLeft = {
             width: '50%',
             paddingRight: '5px',
@@ -117,7 +121,7 @@ export class Bookings extends Component<ListProps, ListState> {
                 <tbody>
                     <tr>
                         <td style={tdBookingStyleLeft}><label>Booking date : </label></td>
-                        <td style={tdBookingStyleRight}><input type="date" id='inputDateBooking' onChange={this.handleInputDateChange}/></td>
+                        <td style={tdBookingStyleRight}><input type="date" id='inputDateBooking' onChange={this.handleInputDateChange} /></td>
                     </tr>
                     {/*<tr>
                         <td style={tdBookingStyleLeft}><label>Starting slot : </label></td>
@@ -157,12 +161,6 @@ export class Bookings extends Component<ListProps, ListState> {
     }
 }
 
-/*const mapStateToProps = (state: RootState) => {
-    return {
-        bookings: _.values(state.booking.items)
-    };
-};*/
-
 const mapStateToProps = (state: RootState) => {
     return {
         bookings: _.values(state.booking.items),
@@ -171,7 +169,7 @@ const mapStateToProps = (state: RootState) => {
     };
 };
 
-const mapDispatchToProps = {
+const mapDispatchToProps = { //For events
     fetchBookingsForDateAndRoom: fetchBookingsForDateAndRoom
 };
 
