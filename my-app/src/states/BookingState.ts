@@ -5,11 +5,12 @@ export interface Bookings {
 }
 
 export interface CreateBooking {
-    
+    bookingToCreate: Booking;
 }
 
 export interface BookingState {
     items: Bookings;
+    bookingToCreate: Booking;
     loading: boolean;
     date: Date;
     idRoom: number;

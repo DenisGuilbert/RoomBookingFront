@@ -49,20 +49,23 @@ export class Bookings extends Component<ListProps, ListState> {
                 <td style={tdBookingStyle}>{booking.userId}</td>
                 <td style={tdBookingStyle}>{booking.startSlot}</td>
                 <td style={tdBookingStyle}>{booking.endSlot}</td>
-                <td style={tdBookingStyle}>{booking.date.toDateString}</td>
+                <td style={tdBookingStyle}>{booking.date}</td>
             </tr>);
         });
     }
 
     handleInputDateChange = e => {
-        //this.setState({ date: e.target.value });
-        this.setState({ date: new Date('2021-03-04') });
+        console.log(e.target.value);
+        this.setState({ date: new Date(e.target.value)});
+        //this.setState({ date: new Date('2021-03-04') });
         //console.log('After setState : ' + this.state.date);
     }
 
     handleInputRoomIdChange = e => {
-        //this.setState({ idRoom: e.target.value });
-        this.setState({ idRoom: 1 });
+        console.log(e.target.value);
+        var xyz:number = e.target.value;
+        this.setState({ idRoom: xyz });
+        //this.setState({ idRoom: 1 });
         //console.log('After setState : ' + this.state.idRoom);
     }
 
