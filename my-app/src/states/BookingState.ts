@@ -10,7 +10,9 @@ export interface CreateBooking {
 
 export interface BookingState {
     items: Bookings;
+    freeBookings: Bookings;
     bookingToCreate: Booking;
+    isBookingCreated: boolean;
     loading: boolean;
     date: Date;
     idRoom: number;

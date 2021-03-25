@@ -1,8 +1,9 @@
-import { BookingActionTypes, FetchBookings } from "../actions/BookingActions";
-import { fetchBookingsForDateAndRoomApi } from "../api/BookingApi";
+import { BookingActionTypes, FetchBookings, CreateBooking } from "../actions/BookingActions";
+import { fetchBookingsForDateAndRoomApi, createBookingApi } from "../api/BookingApi";
 import { all, call, put, takeLatest } from "redux-saga/effects";
 import { AxiosResponse } from "axios";
 import { Booking } from "../domain/Booking";
+//import { CreateBooking } from "../states/BookingState";
 
 export function* getBookingsForDateAndRoomSaga(action: FetchBookings) {
     try {
@@ -22,9 +23,40 @@ export function* getBookingsForDateAndRoomSaga(action: FetchBookings) {
     }
 }
 
+export function* createBookingSaga(action: CreateBooking) {
+    try {
+        console.log('Call Axios with parameters : bookingToCreate : ');
+        console.log(action.bookingToCreate);
+        const response: AxiosResponse<JSON> = yield call(createBookingApi, action.bookingToCreate);
+        console.log('response : ');
+        console.log(response);
+        if (response.status == 207) {
+            console.log('status 207');
+            //Here, a booking with the same parameters already exists.
+            //Then, the API return a list of free bookings for this room
+            yield put({
+                type: BookingActionTypes.CREATE_BOOKING_SUCCESS,                
+                payload: response.data,
+            });
+        } else {
+            yield put({
+                type: BookingActionTypes.CREATE_BOOKING_SUCCESS,
+                payload: response.data
+            });
+        }
+    } catch (e) {
+        console.log('catch in booking saga. Error : ');
+        console.log(e);
+        yield put({
+            type: BookingActionTypes.CREATE_BOOKING_FAIL
+        });
+    }
+}
+
 export default function* () {
     console.log('default function bookingsaga');
     yield all([
         takeLatest(BookingActionTypes.FETCH_BOOKINGS, getBookingsForDateAndRoomSaga),
+        takeLatest(BookingActionTypes.CREATE_BOOKING, createBookingSaga),
     ]);
 }

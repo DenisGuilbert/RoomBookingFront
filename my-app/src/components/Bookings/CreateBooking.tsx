@@ -4,17 +4,19 @@ import { createBooking } from '../../actions/BookingActions';
 import { Booking } from '../../domain/Booking'
 import { RootState } from '../../app/store'
 import { connect } from "react-redux";
-import { Bookings } from './Bookings';
+//import { Bookings } from './Bookings';
 
 export interface ListProps {
-    bookings: Booking[];
+    freeBookings: Booking[];
     bookingToCreate: Booking;
+    isBookingCreated: boolean;
     createBooking: (booking: Booking) => any;
 }
 
 export interface ListState {
-    bookings: Booking[];
+    freeBookings: Booking[];
     bookingToCreate: Booking;
+    isBookingCreated: boolean;
 }
 
 export enum BookingActionSetStateType {
@@ -29,13 +31,37 @@ export class CreateBooking extends Component<ListProps, ListState> {
 
     constructor(props: ListProps) {
         super(props);
-        this.state = { bookings: props.bookings, bookingToCreate: props.bookingToCreate };
+        this.state = { freeBookings: props.freeBookings, bookingToCreate: props.bookingToCreate, isBookingCreated: props.isBookingCreated };
     }
 
     componentDidMount(): void {
 
     }
 
+    renderFreeBookings(): JSX.Element[] | null {
+        const { freeBookings } = this.props;
+        const tdBookingStyle = {
+            //border: '1px solid black',
+            borderBottom: '1px solid black',
+            //height: 'auto'
+        };
+        const trBookingStyle = {
+            border: '1px solid black'
+        };
+        if (!freeBookings) {
+            return null;
+        }
+        return freeBookings.map((booking: Booking) => {
+            console.log('Free booking : ');
+            console.log(booking);
+            return (<tr style={trBookingStyle}>
+                <td style={tdBookingStyle}>{booking.roomId}</td>
+                <td style={tdBookingStyle}>{booking.startSlot}</td>
+                <td style={tdBookingStyle}>{booking.endSlot}</td>
+                <td style={tdBookingStyle}>{booking.date}</td>
+            </tr>);
+        });
+    }
     //Method with an enum to avoid accessing and deconstructing the Booking State everywhere in the code : 
     setBookingState(action: BookingActionSetStateType, value: any) {
         //Create a copy of the state's object : 
@@ -97,6 +123,8 @@ export class CreateBooking extends Component<ListProps, ListState> {
     }
 
     handleButtonCreateClick = e => {
+        console.log('handleButtonCreateClick. Bookingtocreate : ');
+        console.log(this.state.bookingToCreate);
         this.props.createBooking(this.state.bookingToCreate);
     }
 
@@ -121,33 +149,60 @@ export class CreateBooking extends Component<ListProps, ListState> {
             border: '1px solid #1d283a'
         };
 
-        return <div style={divBookingStyle}>
-            <label>Create a new booking : </label>
-            <br />
-            <label>Booking date : </label>
-            <input type="date" id='inputDateBooking' onChange={this.handleInputDateChange} required />
-            <br />
-            <label>Starting slot : </label>
-            <input id='minSlotInput' type='number' min='0' max='23' defaultValue='10' style={inputNumberBookingStyle} required />
-            <br />
-            <label>Ending slot : </label>
-            <input id='maxSlotInput' type='number' min='0' max='23' defaultValue='17' style={inputNumberBookingStyle} required />
-            <br />
-            <label>Room's ID : </label>
-            <input id='roomId' type='number' min='1' defaultValue='1' onChange={this.handleInputRoomIdChange} style={inputNumberBookingStyle} required />
-            <br />
-            <label>User's ID : </label>
-            <input id='userId' type='number' min='1' defaultValue='1' onChange={this.handleInputUserIdChange} style={inputNumberBookingStyle} required />
-            <br />
-            <button style={buttonFormStyle} onClick={this.handleButtonCreateClick}>Create a booking</button>
-        </div >;
+        return (<div>
+            <div style={divBookingStyle}>
+                <div className="divCenter">
+                    <label className="labelTitle">Create a new booking : </label>
+                </div>
+                <div className="divFlex">
+                    <div className="divFlexChild divFlexChildLeft"><label>Booking date : </label></div>
+                    <div className="divFlexChild divFlexChildRight"><input type="date" id='inputDateBooking' onChange={this.handleInputDateChange} required /></div>
+                </div>
+                <div className="divFlex">
+                    <div className="divFlexChild divFlexChildLeft"><label>Starting slot : </label></div>
+                    <div className="divFlexChild divFlexChildRight"><input id='minSlotInput' type='number' min='0' max='23' defaultValue='10' onChange={this.handleInputStartSlotChange} style={inputNumberBookingStyle} required /></div>
+                </div>
+                <div className="divFlex">
+                    <div className="divFlexChild divFlexChildLeft"><label>Ending slot : </label></div>
+                    <div className="divFlexChild divFlexChildRight"> <input id='maxSlotInput' type='number' min='0' max='23' defaultValue='17' onChange={this.handleInputEndSlotChange} style={inputNumberBookingStyle} required /></div>
+                </div>
+                <div className="divFlex">
+                    <div className="divFlexChild divFlexChildLeft"><label>Room's ID : </label></div>
+                    <div className="divFlexChild divFlexChildRight"><input id='roomId' type='number' min='1' defaultValue='1' onChange={this.handleInputRoomIdChange} style={inputNumberBookingStyle} required /></div>
+                </div>
+                <div className="divFlex">
+                    <div className="divFlexChild divFlexChildLeft"><label>User's ID : </label></div>
+                    <div className="divFlexChild divFlexChildRight"><input id='userId' type='number' min='1' defaultValue='1' onChange={this.handleInputUserIdChange} style={inputNumberBookingStyle} required /></div>
+                </div>
+                <div className="divCenter">
+                    <button style={buttonFormStyle} onClick={this.handleButtonCreateClick}>Create a booking</button>
+                </div>
+
+                {this.props.freeBookings.length == 0 && this.props.isBookingCreated && (<label> The booking was successfully created ! </label>)}
+                {this.props.freeBookings.length > 0 && (<label> Already booked slot ! Check the other free slots : </label>)}
+                <table className="tableBookingListStyle">
+                    <thead>
+                        <tr>
+                            <th><label>Room Id :</label></th>
+                            <th ><label>Start slot :</label></th>
+                            <th ><label>End slot :</label></th>
+                            <th ><label>Date :</label></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {this.renderFreeBookings()}
+                    </tbody>
+                </table>
+            </div>
+        </div>);
     }
 }
 
 const mapStateToProps = (state: RootState) => {
     return {
-        bookings: _.values(state.booking.items),
-        bookingToCreate: state.booking.bookingToCreate
+        freeBookings: _.values(state.booking.freeBookings),
+        bookingToCreate: state.booking.bookingToCreate,
+        isBookingCreated: state.booking.isBookingCreated
     };
 };
 

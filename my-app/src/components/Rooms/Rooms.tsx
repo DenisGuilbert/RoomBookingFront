@@ -18,10 +18,7 @@ export class Rooms extends Component<ListProps> {
 
   renderRooms(): JSX.Element[] | null {
     const { rooms } = this.props;
-    const tdRoomStyle = {
-      borderBottom: '1px solid black',
-      height: 'auto'
-    };
+    
     const trRoomStyle = {
       border: '1px solid black'
     };
@@ -29,7 +26,7 @@ export class Rooms extends Component<ListProps> {
       return null;
     }
     return rooms.map((room: Room) => {
-      return <tr style={trRoomStyle}><td style={tdRoomStyle} key={room.id}>{room.id} - {room.name}</td></tr>;
+      return <tr /*style={trRoomStyle}*/><td /*style={tdRoomStyle}*/ key={room.id}>{room.id} - {room.name}</td></tr>;
     });
   }
 
@@ -39,25 +36,16 @@ export class Rooms extends Component<ListProps> {
       margin: 'auto',
       width: '100%',
       height: '100%',
-      background: 'linear-gradient(#7eb3ab, #1d283a)'
-    };
-    const tableRoomStyle = {
-      margin: 'auto',
-      width: '20%',
-      borderSpacing: '0',
-      border: '1px solid black',
-      borderRadius: '7px',
-      background: 'linear-gradient(#9adbd1, #2b3c57)',
-      color: 'white'
+      /*background: 'linear-gradient(#7eb3ab, #1d283a)'*/
     };
     const thRoomStyle = {
       borderBottom: '1px solid black',
       height: 'auto'
     };
     return (
-      <div style={divRoomStyle}>
-        <table style={tableRoomStyle}>
-          <thead style={thRoomStyle}>
+      <div /*style={divRoomStyle}*/>
+        <table className="tableElementsList" /*style={tableRoomStyle}*/>
+          <thead /*style={thRoomStyle}*/>
             <tr>
               <td>
                 <label>The room's list :</label>

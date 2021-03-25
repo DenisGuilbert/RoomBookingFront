@@ -1,0 +1,101 @@
+.tableElementsList {
+    border: 1px solid black;
+    margin: auto;
+    width: 20%;
+    border-spacing: 0;
+    border: 1px solid black;
+    border-radius: 7px;
+    /*For fun : */
+    /*background: linear-gradient(#9adbd1, #2b3c57);
+    color: white;*/
+}
+
+.tableElementsList>thead>tr>td {
+    font-weight: bold;
+}
+
+.tableElementsList td {
+    border-bottom: 1px solid black;
+    height: auto;
+}
+
+.tableElementsList tbody tr:last-child td:last-child {
+    /* styling here */
+    border-bottom: none;
+}
+
+.tableBookingListStyle {
+    margin: 5px auto auto auto;
+    border-spacing: 0px;
+    width: 600px;
+}
+
+.tableBookingListStyle td,
+.tableBookingListStyle th {
+    border-bottom: 1px solid black;
+}
+
+.divGlobal {
+    /*padding: 10px 0px 10px 0px;*/
+    /*Top right bottom left*/
+    /*margin: auto;
+    width: 100%;
+    height: 100%;*/
+    /*background: 'linear-gradient(#7eb3ab, #1d283a)'*/
+    padding: 10px;
+    /* 5px 10px 5px 10px;*/
+    /*Top right bottom left*/
+    margin: 10px auto auto auto;
+    /*Top right bottom left*/
+    width: fit-content;
+    height: 100%;
+    border-radius: 5px;
+    border: 1px solid grey;
+}
+
+.inputNumberBooking {
+    width: 40px;
+}
+
+.divFlex {
+    display: inline-flex;
+    text-align: center;
+    align-items: center;
+    width: -webkit-fill-available;
+    margin-bottom: 5px;
+}
+
+.divCenter {
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.divFlexChildLeft,
+.divFlexChildRight {
+    width: 50%;
+}
+
+.divFlexChildLeft {
+    margin-right: 2px;
+    text-align: right;
+}
+
+.divFlexChildRight {
+    margin-left: 2px;
+    text-align: left;
+}
+
+.labelTitle {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.labelSuccess {
+    color: green;
+}
+
+.buttonSubmitFormStyle {
+    background: linear-gradient(0.25turn, #A9A9A9, #808080);
+    border-radius: 5px;
+    border: 1px solid #1d283a;
+}
