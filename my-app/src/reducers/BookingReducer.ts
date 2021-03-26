@@ -7,8 +7,8 @@ import { BookingState } from "../states/BookingState";
 const initialState = {
     items: {},
     freeBookings: {},
-    bookingToCreate: { id: 0, roomId: 0, userId: 0, startSlot: 0, endSlot: 0, date: new Date() },
-    idRoom: 0,
+    bookingToCreate: { id: 0, roomId: 1, userId: 1, startSlot: 10, endSlot: 17, date: new Date() },
+    idRoom: 1,
     date: new Date(),
     creationStatus: false,
     loading: false,
@@ -20,12 +20,9 @@ export const BookingReducer: Reducer<BookingState, BookingAction> = (
     state = initialState,
     action
 ) => {
-
     switch (action.type) {
 
         case BookingActionTypes.FETCH_BOOKINGS:
-            console.log('Booking reducer, Fetch.');
-            console.log('Parameters : idRoom : ' + state.idRoom + ', date : ' + state.date);
             return {
                 ...state,
                 idRoom: state.idRoom,
@@ -35,7 +32,6 @@ export const BookingReducer: Reducer<BookingState, BookingAction> = (
             };
             
         case BookingActionTypes.FETCH_BOOKINGS_SUCCESS:
-            console.log('Booking reducer, Fetch Success');
             return {
                 ...state,
                 items: { ...state.items, ..._.mapKeys(action.payload, "id") },
@@ -44,8 +40,6 @@ export const BookingReducer: Reducer<BookingState, BookingAction> = (
             };
 
         case BookingActionTypes.FETCH_BOOKINGS_FAIL:
-            console.log('Booking reducer, Fetch Fail. State : ');
-            console.log(state);
             return {
                 ...state,
                 items: {},
@@ -53,8 +47,7 @@ export const BookingReducer: Reducer<BookingState, BookingAction> = (
             };
 
         case BookingActionTypes.CREATE_BOOKING:
-            console.log('Booking reducer, Create.');
-            console.log('Parameters : bookingToCreate : ');
+            console.log('Booking reducer, CREATE booking : ');
             console.log(state.bookingToCreate);
             return {
                 ...state,
@@ -62,11 +55,16 @@ export const BookingReducer: Reducer<BookingState, BookingAction> = (
             };
 
         case BookingActionTypes.CREATE_BOOKING_SUCCESS:
-            console.log('Booking reducer, CREATE booking Success');
-            console.log(action.payload);
-            return {
+            console.log('Booking reducer, CREATE booking Success : ');
+            console.log(action.payload);            
+            /*return {
                 ...state,
                 freeBookings: { ...state.items, ..._.mapKeys(action.payload, "id") },
+                loading: false
+            };*/
+            return {
+                ...state,
+                freeBookings: { ...state.items, ...action.payload },
                 loading: false
             };
 

@@ -8,7 +8,7 @@ import CreateBooking from './components/Bookings/CreateBooking';
 function App() {
   return (
     <div className="App">
-      {/*<Rooms />*/}
+      <Rooms />
       <CreateRooms />
       <Bookings />
       <CreateBooking />

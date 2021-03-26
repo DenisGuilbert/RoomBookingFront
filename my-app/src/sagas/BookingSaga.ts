@@ -7,10 +7,7 @@ import { Booking } from "../domain/Booking";
 
 export function* getBookingsForDateAndRoomSaga(action: FetchBookings) {
     try {
-        console.log('Call Axios with parameters : idRoom : ' + action.idRoom + ', date : ' + action.date.toDateString());
         const response: AxiosResponse<Booking[]> = yield call(fetchBookingsForDateAndRoomApi, action.idRoom, action.date);
-        console.log('response : ');
-        console.log(response);
         yield put({
             type: BookingActionTypes.FETCH_BOOKINGS_SUCCESS,
             payload: response.data
@@ -25,7 +22,7 @@ export function* getBookingsForDateAndRoomSaga(action: FetchBookings) {
 
 export function* createBookingSaga(action: CreateBooking) {
     try {
-        console.log('Call Axios with parameters : bookingToCreate : ');
+        console.log('BookingSage. Call Axios with parameters : ');
         console.log(action.bookingToCreate);
         const response: AxiosResponse<JSON> = yield call(createBookingApi, action.bookingToCreate);
         console.log('response : ');
@@ -54,7 +51,6 @@ export function* createBookingSaga(action: CreateBooking) {
 }
 
 export default function* () {
-    console.log('default function bookingsaga');
     yield all([
         takeLatest(BookingActionTypes.FETCH_BOOKINGS, getBookingsForDateAndRoomSaga),
         takeLatest(BookingActionTypes.CREATE_BOOKING, createBookingSaga),

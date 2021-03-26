@@ -26,7 +26,7 @@ export class Bookings extends Component<ListProps, ListState> {
     }
 
     componentDidMount(): void {
-        this.props.fetchBookingsForDateAndRoom(/*this.state.idRoom, this.state.date*/2, new Date('2021-03-23'));//test, this is ok
+        //this.props.fetchBookingsForDateAndRoom(/*this.state.idRoom, this.state.date*/2, new Date('2021-03-23'));//test, this is ok
     }
 
     renderBookings(): JSX.Element[] | null {
@@ -48,18 +48,12 @@ export class Bookings extends Component<ListProps, ListState> {
     }
 
     handleInputDateChange = e => {
-        console.log(e.target.value);
         this.setState({ date: new Date(e.target.value) });
-        //this.setState({ date: new Date('2021-03-04') });
-        //console.log('After setState : ' + this.state.date);
     }
 
     handleInputRoomIdChange = e => {
-        console.log(e.target.value);
         var xyz: number = e.target.value;
         this.setState({ idRoom: xyz });
-        //this.setState({ idRoom: 1 });
-        //console.log('After setState : ' + this.state.idRoom);
     }
 
     handleButtonClick = e => {
@@ -83,11 +77,10 @@ export class Bookings extends Component<ListProps, ListState> {
                 <div className="divFlexChild divFlexChildLeft"><label>Room's ID : </label></div>
                 <div className="divFlexChild divFlexChildRight"><input id='roomId' type='number' min='1' defaultValue='1' onChange={this.handleInputRoomIdChange} style={inputNumberBookingStyle} required /></div>
             </div>
-            
+
             <div className="divCenter">
                 <button className="buttonSubmitFormStyle" onClick={this.handleButtonClick}>Check the bookings</button>
-                </div>
-            
+            </div>
 
             <table className="tableBookingListStyle">
                 <thead>

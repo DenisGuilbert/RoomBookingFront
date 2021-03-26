@@ -35,14 +35,22 @@ export class CreateRooms extends Component<ListProps, ListState> {
     }
 
     render() {
+
+        const additionalStyleGlobalDiv = {
+            width: "359px"
+        }
         return (
-            <div className="divGlobal">
+            <div className="divGlobal" style={additionalStyleGlobalDiv}>
                 <div className="divCenter">
                     <label className="labelTitle">Create a room here :</label>
                 </div>
                 <div className="divFlex">
-                    <label>Name :</label>
-                    <input type="text" placeholder="Enter Room's name" value={this.state.name} onChange={this.handleInputChange} required />
+                    <div className="divFlexChildLeft">
+                        <label>Name :</label>
+                    </div>
+                    <div className="divFlexChildRight">
+                        <input type="text" placeholder="Enter Room's name" value={this.state.name} onChange={this.handleInputChange} />
+                    </div>
                 </div>
                 {this.props.creationStatus && (<div><label className="labelSuccess">The room was successfully created</label></div>)}
                 <div className="divCenter">

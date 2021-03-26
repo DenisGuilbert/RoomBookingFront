@@ -51,7 +51,10 @@ export class CreateBooking extends Component<ListProps, ListState> {
         if (!freeBookings) {
             return null;
         }
+        console.log('freebookings : ');
+        console.log(freeBookings);
         return freeBookings.map((booking: Booking) => {
+            console.log('Component CreateBooking, iterate on freeBookings object : ');
             console.log('Free booking : ');
             console.log(booking);
             return (<tr style={trBookingStyle}>
@@ -97,34 +100,27 @@ export class CreateBooking extends Component<ListProps, ListState> {
     handleInputRoomIdChange = e => {
         var rId: number = e.target.value;
         this.setBookingState(BookingActionSetStateType.SET_STATE_ROOM_ID, rId);
-        console.log(this.state.bookingToCreate.roomId);
     }
 
     handleInputUserIdChange = e => {
         var uId: number = e.target.value;
         this.setBookingState(BookingActionSetStateType.SET_STATE_USER_ID, uId);
-        console.log(this.state.bookingToCreate.userId);
     }
 
     handleInputDateChange = e => {
         this.setBookingState(BookingActionSetStateType.SET_STATE_DATE, new Date(e.target.value));
-        console.log(this.state.bookingToCreate.date);
     }
 
     handleInputStartSlotChange = e => {
         var startSlot: number = e.target.value;
         this.setBookingState(BookingActionSetStateType.SET_STATE_START_SLOT, startSlot);
-        console.log(this.state.bookingToCreate.startSlot);
     }
     handleInputEndSlotChange = e => {
         var endSlot: number = e.target.value;
         this.setBookingState(BookingActionSetStateType.SET_STATE_END_SLOT, endSlot);
-        console.log(this.state.bookingToCreate.endSlot);
     }
 
     handleButtonCreateClick = e => {
-        console.log('handleButtonCreateClick. Bookingtocreate : ');
-        console.log(this.state.bookingToCreate);
         this.props.createBooking(this.state.bookingToCreate);
     }
 
@@ -139,9 +135,11 @@ export class CreateBooking extends Component<ListProps, ListState> {
             borderRadius: '5px',
             border: '1px solid grey',
         };
+        
         const inputNumberBookingStyle = {
             width: '40px',
         };
+
         const buttonFormStyle = {
             //backgroundColor: '#7eb3ab',
             background: 'linear-gradient(0.25turn, #A9A9A9, #808080)',
