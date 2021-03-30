@@ -4,6 +4,7 @@ import Rooms from './components/Rooms/Rooms';
 import CreateRooms from './components/Rooms/CreateRoom';
 import Bookings from './components/Bookings/Bookings';
 import CreateBooking from './components/Bookings/CreateBooking';
+import DeleteBooking from './components/Bookings/DeleteBooking';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <CreateRooms />
       <Bookings />
       <CreateBooking />
+      <DeleteBooking />
     </div>
   );
 }

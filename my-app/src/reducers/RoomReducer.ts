@@ -25,7 +25,6 @@ export const RoomReducer: Reducer<RoomState, RoomAction> = (
             };
 
         case RoomActionTypes.CREATE_ROOM:
-            //console.log('in reducer, CREATE ROOM');
             return {
                 ...state,
                 name: state.name,
@@ -34,7 +33,6 @@ export const RoomReducer: Reducer<RoomState, RoomAction> = (
             };
 
         case RoomActionTypes.CREATE_ROOM_SUCCESS:
-            //console.log('in reducer, CREATE ROOM SUCCESS');
             return {
                 ...state,
                 name: state.name,
@@ -43,7 +41,6 @@ export const RoomReducer: Reducer<RoomState, RoomAction> = (
             };
 
         case RoomActionTypes.CREATE_ROOM_FAIL:
-            //console.log('in reducer, CREATE ROOM FAIL');
             return {
                 ...state,
                 name: state.name,
@@ -52,7 +49,6 @@ export const RoomReducer: Reducer<RoomState, RoomAction> = (
             };
 
         default:
-            //console.log('in reducer, default : ' + action.type);
             return state;
     }
 };

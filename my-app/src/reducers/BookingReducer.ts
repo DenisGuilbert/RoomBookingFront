@@ -13,6 +13,8 @@ const initialState = {
     creationStatus: false,
     loading: false,
     isBookingCreated: false,
+    idToDelete: 0,
+    deleteStatus: false,
     error: null
 };
 
@@ -55,13 +57,6 @@ export const BookingReducer: Reducer<BookingState, BookingAction> = (
             };
 
         case BookingActionTypes.CREATE_BOOKING_SUCCESS:
-            console.log('Booking reducer, CREATE booking Success : ');
-            console.log(action.payload);            
-            /*return {
-                ...state,
-                freeBookings: { ...state.items, ..._.mapKeys(action.payload, "id") },
-                loading: false
-            };*/
             return {
                 ...state,
                 freeBookings: { ...state.items, ...action.payload },
@@ -72,6 +67,29 @@ export const BookingReducer: Reducer<BookingState, BookingAction> = (
             return {
                 ...state,
                 items: {},
+                loading: false
+            };
+
+            case BookingActionTypes.DELETE_BOOKING:
+            console.log('Booking reducer, CREATE booking : ');
+            console.log(state.bookingToCreate);
+            return {
+                ...state,
+                idToDelete: state.idToDelete, 
+                loading: true
+            };
+
+        case BookingActionTypes.DELETE_BOOKING_SUCCESS:
+            return {
+                ...state,
+                deleteStatus : true,
+                loading: false
+            };
+
+        case BookingActionTypes.DELETE_BOOKING_FAIL:
+            return {
+                ...state,
+                deleteStatus : false,
                 loading: false
             };
 

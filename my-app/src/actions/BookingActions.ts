@@ -8,6 +8,9 @@ export enum BookingActionTypes {
     CREATE_BOOKING = "CREATE_BOOKING",
     CREATE_BOOKING_SUCCESS = "CREATE_BOOKING_SUCCESS",
     CREATE_BOOKING_FAIL = "CREATE_BOOKING_FAIL",
+    DELETE_BOOKING = "DELETE_BOOKING",
+    DELETE_BOOKING_SUCCESS = "DELETE_BOOKING_SUCCESS",
+    DELETE_BOOKING_FAIL = "DELETE_BOOKING_FAIL",
 }
 
 export interface FetchBookings {
@@ -39,6 +42,19 @@ interface CreateBookingFail {
     type: BookingActionTypes.CREATE_BOOKING_FAIL;
 }
 
+export interface DeleteBooking {
+    type: BookingActionTypes.DELETE_BOOKING;
+    idToDelete: number;
+}
+
+interface DeleteBookingSuccess {
+    type: BookingActionTypes.DELETE_BOOKING_SUCCESS;
+}
+
+interface DeleteBookingFail {
+    type: BookingActionTypes.DELETE_BOOKING_FAIL;
+}
+
 export const fetchBookingsForDateAndRoom = (idRoom: number, date: Date): FetchBookings => ({
     type: BookingActionTypes.FETCH_BOOKINGS,
     idRoom: idRoom,
@@ -50,10 +66,18 @@ export const createBooking = (bookingToCreate: Booking): CreateBooking => ({
     bookingToCreate: bookingToCreate,
 });
 
+export const deleteBooking = (idToDelete: number): DeleteBooking => ({
+    type: BookingActionTypes.DELETE_BOOKING,
+    idToDelete: idToDelete,
+});
+
 export type BookingAction =
     | FetchBookings
     | FetchBookingsSuccess
     | FetchBookingsFail
     | CreateBooking
     | CreateBookingSuccess
-    | CreateBookingFail;
+    | CreateBookingFail
+    | DeleteBooking
+    | DeleteBookingSuccess
+    | DeleteBookingFail;
