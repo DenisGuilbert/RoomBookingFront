@@ -23,5 +23,5 @@ export interface BookingState {
     date: Date;
     idRoom: number;
     error: String | null;
-    creationStatus: Boolean;
+    creationStatus: boolean;
 }

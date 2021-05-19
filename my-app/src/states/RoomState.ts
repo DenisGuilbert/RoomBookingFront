@@ -13,7 +13,7 @@ export interface RoomState {
     loading: boolean;
     error: String | null;
     name: string;
-    creationStatus: Boolean;
+    creationStatus: boolean;
 }
 
 export interface CreateRoomState {

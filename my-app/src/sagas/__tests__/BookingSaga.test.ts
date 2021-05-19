@@ -16,9 +16,9 @@ test("should fetch rooms and dispatch success action", async () => {
     const dispatched = [];
 
     //?
-    await runSaga({
+    /*await runSaga({
       dispatch: (act) => dispatched.push(act),
-    }, getRoomsSaga);
+    }, getRoomsSaga);*/
 
     const successAction = {
       type: RoomActionTypes.FETCH_ROOMS_SUCCESS,
@@ -30,7 +30,7 @@ test("should fetch rooms and dispatch success action", async () => {
     fetchRooms.mockClear();
 });
 
-test("should create room and dispatch success action", async () => {
+/*test("should create room and dispatch success action", async () => {
   //Mock objects
     const values: Room[] = [{ id: 1, name: "My Room 1" }];
     const response: AxiosResponse<void> = {
@@ -40,9 +40,9 @@ test("should create room and dispatch success action", async () => {
     const dispatched = [];
 
     //?
-    /*await runSaga({
+    await runSaga({
       dispatch: (act) => dispatched.push(act),
-    }, createRoom);*/
+    }, createRoom);
 
     const successAction = {
       type: RoomActionTypes.CREATE_ROOM_SUCCESS,
@@ -51,4 +51,4 @@ test("should create room and dispatch success action", async () => {
     expect(createRoom).toHaveBeenCalledTimes(1);
     expect(dispatched).toEqual([successAction]);
     createRoom.mockClear();
-});
+});*/

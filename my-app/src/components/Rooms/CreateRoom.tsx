@@ -12,14 +12,14 @@ export interface ListProps {
 
 export interface ListState {
     name: string;
-    //creationStatus: boolean;
+    creationStatus: boolean;
 }
 
 export class CreateRooms extends Component<ListProps, ListState> {
 
     constructor(props: ListProps) {
         super(props);
-        this.state = { name: props.name/*, creationStatus: props.creationStatus */ };
+        this.state = { name: props.name, creationStatus: props.creationStatus };
     }
 
     componentDidMount(): void {
