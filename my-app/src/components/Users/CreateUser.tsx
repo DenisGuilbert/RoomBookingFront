@@ -1,16 +1,24 @@
 import { Component } from 'react';
-import { createUser } from '../../actions/UserActions';
-import { RootState } from '../../app/store'
+import { createUser, fetchGenres, fetchJobs } from '../../actions/UserActions';
+import { RootState } from '../../app/store';
 import { connect } from "react-redux";
+import { Genre } from '../../domain/Genre';
+import { Job } from '../../domain/Job';
 import { debug } from 'node:console';
+import _ from "lodash";
+import { Formik, Field, Form } from 'formik';
 
 export interface ListProps {
+    allGenres: Genre[];
+    allJobs: Job[];
     firstName: string;
     lastName: string;
     idGenre: number;
     idJob: number;
     creationStatus: boolean;
     createUser: (firstName: string, lastName: string, idGenre: number, idJob: number) => any;
+    fetchGenres: () => any;
+    fetchJobs: () => any;
 }
 
 export interface ListState {
@@ -27,9 +35,9 @@ export class CreateUser extends Component<ListProps, ListState> {
         super(props);
         this.state = { firstName: props.firstName, lastName: props.lastName, idGenre: props.idGenre, idJob: props.idJob, creationStatus: props.creationStatus };
     }
-
     componentDidMount(): void {
-        //alert(this.props.creationStatus);
+        this.props.fetchGenres();
+        this.props.fetchJobs();
     }
 
     handleInputFirstNameChange = e => {
@@ -59,21 +67,30 @@ export class CreateUser extends Component<ListProps, ListState> {
         }
         return (
             <div className="divGlobal" style={additionalStyleGlobalDiv}>
-                <div className="divCenter">
-                    <label className="labelTitle">Create a user here :</label>
-                </div>
-                <div className="divFlex">
-                    <div className="divFlexChildLeft">
-                        <label>First name :</label>
-                    </div>
-                    <div className="divFlexChildRight">
-                        <input type="text" placeholder="Enter User's first name" value={this.state.firstName} onChange={this.handleInputFirstNameChange} />
-                    </div>
-                </div>
-                {this.props.creationStatus && (<div><label className="labelSuccess">The user was successfully created</label></div>)}
-                <div className="divCenter">
-                    <input type='submit' value="Create user" onClick={this.handleSubmitButton} className="buttonSubmitFormStyle" />
-                </div>
+                <h1>Sign Up</h1>
+                <Formik
+                    initialValues={{
+                        firstName: '',
+                        lastName: '',
+                        idGenre: 0,
+                        idJob: 1
+                    }}
+                    onSubmit={async (values) => {
+                        //call create user method
+                    }}>
+                        
+                    <Form>
+                        <label htmlFor="firstName">First Name</label>
+                        <Field id="firstName" name="firstName" placeholder="John" />
+
+                        <label htmlFor="lastName">Last Name</label>
+                        <Field id="lastName" name="lastName" placeholder="Doe" />
+
+                        {/* Set the 2 selects here, after resolving the compilation error*/}
+
+                        <button type="submit">Submit</button>
+                    </Form>
+                </Formik>
             </div>
         );
     }
@@ -85,12 +102,16 @@ const mapStateToProps = (state: RootState) => {
         lastName: state.user.lastName,
         idGenre: state.user.idGenre,
         idJob: state.user.idJob,
-        //creationStatus: state.user.creationStatus
+        creationStatus: state.user.creationStatus,
+        allGenres: _.values(state.user.allGenres),
+        allJobs: _.values(state.user.allJobs)
     };
 };
 
 const mapDispatchToProps = { //Events
-    createUser: createUser
+    createUser: createUser,
+    fetchGenres: fetchGenres,
+    fetchJobs: fetchJobs
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateUser)

@@ -5,8 +5,10 @@ import { UserState } from "../states/UserState";
 
 const initialState = {
     items: {},
+    allGenres: {},
+    allJobs: {},
     firstName: '',
-    lastName: 0,
+    lastName: '',
     idGenre: 0,
     idJob: 0,
     creationStatus: false,
@@ -19,6 +21,20 @@ export const UserReducer: Reducer<UserState, UserAction> = (
     action
 ) => {
     switch (action.type) {
+
+        case UserActionTypes.FETCH_GENRES_SUCCESS:
+            return {
+                ...state,
+                allGenres: { ...state.allGenres, ..._.mapKeys(action.payload, "id") },
+                loading: false
+            };
+
+            case UserActionTypes.FETCH_JOBS_SUCCESS:
+                return {
+                    ...state,
+                    allJobs: { ...state.allJobs, ..._.mapKeys(action.payload, "id") },
+                    loading: false
+                };
 
         case UserActionTypes.FETCH_USERS_SUCCESS:
             return {

@@ -1,4 +1,14 @@
+import { Genre } from "../domain/Genre";
+import { Job } from "../domain/Job";
 import { User } from "../domain/User";
+
+export interface Genres {
+    [id: number]: Genre;
+}
+
+export interface Jobs {
+    [id: number]: Job;
+}
 
 export interface Users {
     [id: number]: User;
@@ -9,6 +19,8 @@ export interface CreateUser {
 }
 
 export interface UserState {
+    allGenres: Jobs;
+    allJobs: Genres;
     items: Users;
     loading: boolean;
     error: String | null;

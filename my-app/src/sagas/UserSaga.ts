@@ -1,8 +1,38 @@
 import { UserAction, UserActionTypes, CreateUser as ActionCreateUser } from "../actions/UserActions";
-import { fetchUsers, createUser as create } from "../api/UserApi";
+import { fetchGenres, fetchJobs, fetchUsers, createUser as create } from "../api/UserApi";
 import { all, call, put, takeLatest } from "redux-saga/effects";
 import { AxiosResponse } from "axios";
 import { User } from "../domain/User";
+import { Genre } from "../domain/Genre";
+import { Job } from "../domain/Job";
+
+export function* getGenresSaga() {
+    try {
+        const response: AxiosResponse<Genre[]> = yield call(fetchGenres);
+        yield put({
+            type: UserActionTypes.FETCH_GENRES_SUCCESS,
+            payload: response.data
+        });
+    } catch (e) {
+        yield put({
+            type: UserActionTypes.FETCH_GENRES_FAIL
+        });
+    }
+}
+
+export function* getJobsSaga() {
+    try {
+        const response: AxiosResponse<Job[]> = yield call(fetchJobs);
+        yield put({
+            type: UserActionTypes.FETCH_JOBS_SUCCESS,
+            payload: response.data
+        });
+    } catch (e) {
+        yield put({
+            type: UserActionTypes.FETCH_JOBS_FAIL
+        });
+    }
+}
 
 export function* getUsersSaga() {
     try {

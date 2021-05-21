@@ -25,7 +25,7 @@ interface FetchRoomsFail {
 
 export interface CreateRoom {
     type: RoomActionTypes.CREATE_ROOM;
-    payload: boolean;
+    payload: string;
 }
 
 interface CreateRoomSuccess {
@@ -41,9 +41,9 @@ export const fetchRooms = (): FetchRooms => ({
     type: RoomActionTypes.FETCH_ROOMS
 });
 
-export const createRoom = (name: string, creationStatus: boolean): CreateRoom => ({
+export const createRoom = (name: string/*, creationStatus: boolean*/): CreateRoom => ({
     type: RoomActionTypes.CREATE_ROOM,
-    payload: creationStatus
+    payload: name
 });
 
 export type RoomAction =
