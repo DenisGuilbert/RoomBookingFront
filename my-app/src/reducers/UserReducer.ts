@@ -22,19 +22,28 @@ export const UserReducer: Reducer<UserState, UserAction> = (
 ) => {
     switch (action.type) {
 
+        case UserActionTypes.FETCH_GENRES_FAIL:
+            console.log('fetch genres reducer fail');
+            return {
+                ...state,
+                allGenres: {},
+                loading: false
+            };
+
         case UserActionTypes.FETCH_GENRES_SUCCESS:
+            console.log('success fetch genres');
             return {
                 ...state,
                 allGenres: { ...state.allGenres, ..._.mapKeys(action.payload, "id") },
                 loading: false
             };
 
-            case UserActionTypes.FETCH_JOBS_SUCCESS:
-                return {
-                    ...state,
-                    allJobs: { ...state.allJobs, ..._.mapKeys(action.payload, "id") },
-                    loading: false
-                };
+        case UserActionTypes.FETCH_JOBS_SUCCESS:
+            return {
+                ...state,
+                allJobs: { ...state.allJobs, ..._.mapKeys(action.payload, "id") },
+                loading: false
+            };
 
         case UserActionTypes.FETCH_USERS_SUCCESS:
             return {

@@ -19,8 +19,8 @@ export interface CreateUser {
 }
 
 export interface UserState {
-    allGenres: Jobs;
-    allJobs: Genres;
+    allGenres: Genres;
+    allJobs: Jobs;
     items: Users;
     loading: boolean;
     error: String | null;

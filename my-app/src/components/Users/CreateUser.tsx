@@ -22,6 +22,8 @@ export interface ListProps {
 }
 
 export interface ListState {
+    allGenres: Genre[];
+    allJobs: Job[];
     firstName: string;
     lastName: string;
     idGenre: number;
@@ -33,14 +35,17 @@ export class CreateUser extends Component<ListProps, ListState> {
 
     constructor(props: ListProps) {
         super(props);
-        this.state = { firstName: props.firstName, lastName: props.lastName, idGenre: props.idGenre, idJob: props.idJob, creationStatus: props.creationStatus };
+        this.state = { allGenres: props.allGenres, allJobs: props.allJobs, firstName: props.firstName, lastName: props.lastName, idGenre: props.idGenre, idJob: props.idJob, creationStatus: props.creationStatus };
     }
+
     componentDidMount(): void {
         this.props.fetchGenres();
         this.props.fetchJobs();
+        console.log(this.props.allGenres);
+        console.log(this.props.allJobs);
     }
 
-    handleInputFirstNameChange = e => {
+    /*handleInputFirstNameChange = e => {
         this.setState({ firstName: e.target.value });
     }
 
@@ -49,48 +54,94 @@ export class CreateUser extends Component<ListProps, ListState> {
     }
 
     handleInputGenreChange = e => {
-        this.setState({ idGenre: e.target.value }); //todo dropdownlist
+        this.setState({ idGenre: e.target.value });
     }
 
     handleInputJobChange = e => {
-        this.setState({ idJob: e.target.value }); //todo dropdownlist
-    }
+        this.setState({ idJob: e.target.value });
+    }*/
 
     handleSubmitButton = e => {
+
+        var gId: number = e.idGenre;
+        var jId: number = e.idJob;
+        this.setState({ lastName: e.lastName });
+        this.setState({ firstName: e.firstName });        
+        this.setState({ idGenre: gId });
+        this.setState({ idJob: jId });
+
+        console.log(this.state);
+
         this.props.createUser(this.state.firstName, this.state.lastName, this.state.idGenre, this.state.idJob);
     }
 
     render() {
-
         const additionalStyleGlobalDiv = {
-            width: "359px"
+
         }
         return (
             <div className="divGlobal" style={additionalStyleGlobalDiv}>
-                <h1>Sign Up</h1>
+                <label className='labelTitle'>Create a new user</label>
                 <Formik
                     initialValues={{
                         firstName: '',
                         lastName: '',
                         idGenre: 0,
-                        idJob: 1
+                        idJob: 0
                     }}
                     onSubmit={async (values) => {
                         //call create user method
+                        this.handleSubmitButton(values);
                     }}>
-                        
+
                     <Form>
-                        <label htmlFor="firstName">First Name</label>
-                        <Field id="firstName" name="firstName" placeholder="John" />
 
-                        <label htmlFor="lastName">Last Name</label>
-                        <Field id="lastName" name="lastName" placeholder="Doe" />
+                        <div className="divGlobal">
+                            <div className="divFlex">
+                                <div className="divFlexChildLeft">
+                                    <label htmlFor="firstName">First Name : </label>
+                                </div>
+                                <div className="divFlexChildRight">
+                                    <Field id="firstName" name="firstName" placeholder="John" />
+                                </div>
+                            </div>
 
-                        {/* Set the 2 selects here, after resolving the compilation error*/}
+                            <div className="divFlex">
+                                <div className="divFlexChildLeft">
+                                    <label htmlFor="lastName">Last Name : </label>
+                                </div>
+                                <div className="divFlexChildRight">
+                                    <Field id="lastName" name="lastName" placeholder="Doe" />
+                                </div>
+                            </div>
 
-                        <button type="submit">Submit</button>
+                            <div className="divFlex">
+                                <div className="divFlexChildLeft">
+                                    <label htmlFor="genre">Select your genre :</label>
+                                </div>
+                                <div className="divFlexChildRight">
+                                    <Field as="select" name='idGenre'>
+                                        {this.props.allGenres.map(genre => <option value={genre.id}>{genre.name}</option>)}
+                                    </Field>
+                                </div>
+                            </div>
+
+                            <div className="divFlex">
+                                <div className="divFlexChildLeft">
+                                    <label htmlFor="job">Select your job :</label>
+                                </div>
+                                <div className="divFlexChildRight">
+                                    <Field as="select" name='idJob'>
+                                        {this.props.allJobs.map(job =><option value={job.id}>{job.name}</option>)}
+                                    </Field>
+                                </div>
+                            </div>
+
+                        </div>
+                        <button type="submit">Create</button>
                     </Form>
                 </Formik>
+                {this.props.creationStatus && (<div><label className="labelSuccess">The user was successfully created</label></div>)}
             </div>
         );
     }

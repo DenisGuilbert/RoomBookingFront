@@ -37,7 +37,7 @@ export const BookingReducer: Reducer<BookingState, BookingAction> = (
             return {
                 ...state,
                 items: { ...state.items, ..._.mapKeys(action.payload, "id") },
-                isBookingCreated: true, //todo change that
+                isBookingCreated: true,
                 loading: false
             };
 
@@ -49,8 +49,6 @@ export const BookingReducer: Reducer<BookingState, BookingAction> = (
             };
 
         case BookingActionTypes.CREATE_BOOKING:
-            console.log('Booking reducer, CREATE booking : ');
-            console.log(state.bookingToCreate);
             return {
                 ...state,
                 bookingToCreate: state.bookingToCreate,
@@ -71,8 +69,6 @@ export const BookingReducer: Reducer<BookingState, BookingAction> = (
             };
 
             case BookingActionTypes.DELETE_BOOKING:
-            console.log('Booking reducer, CREATE booking : ');
-            console.log(state.bookingToCreate);
             return {
                 ...state,
                 idToDelete: state.idToDelete, 
@@ -94,7 +90,6 @@ export const BookingReducer: Reducer<BookingState, BookingAction> = (
             };
 
         default:
-            console.log('Booking reducer, default');
             return state;
     }
 };

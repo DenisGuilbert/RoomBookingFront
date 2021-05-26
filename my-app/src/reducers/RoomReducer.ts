@@ -16,7 +16,6 @@ export const RoomReducer: Reducer<RoomState, RoomAction> = (
     action
 ) => {
     switch (action.type) {
-
         case RoomActionTypes.FETCH_ROOMS_SUCCESS:
             return {
                 ...state,

@@ -99,3 +99,20 @@
     border-radius: 5px;
     border: 1px solid #1d283a;
 }
+
+.menuBar {
+    display: inline;
+    width: 33%;
+    text-align: center;
+    border: 1px solid;
+}
+
+.menuItem {
+    display: inline;
+    margin-left: 2%;
+    width: 32%;
+    text-align: center;
+    background: lightgray;
+    border-radius: 5px;
+    padding: 3px;
+}
