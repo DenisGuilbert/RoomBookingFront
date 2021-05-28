@@ -93,10 +93,9 @@ export class CreateUser extends Component<ListProps, ListState> {
                         //call create user method
                         this.handleSubmitButton(values);
                     }}>
-
                     <Form>
-
                         <div className="divGlobal">
+                            
                             <div className="divFlex">
                                 <div className="divFlexChildLeft">
                                     <label htmlFor="firstName">First Name : </label>
@@ -136,7 +135,7 @@ export class CreateUser extends Component<ListProps, ListState> {
                                     </Field>
                                 </div>
                             </div>
-
+                            
                         </div>
                         <button type="submit">Create</button>
                     </Form>

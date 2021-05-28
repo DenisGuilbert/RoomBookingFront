@@ -13,6 +13,7 @@ import Bookings from './components/Bookings/Bookings';
 import CreateBooking from './components/Bookings/CreateBooking';
 import DeleteBooking from './components/Bookings/DeleteBooking';
 import CreateUser from './components/Users/CreateUser';
+import IntroductionHooks from './components/Hooks/IntroductionHooks';
 
 function App() {
   return (
@@ -24,28 +25,31 @@ function App() {
     //   <DeleteBooking />
     //   <CreateUser />
     // </div>
-    
+
     <Router>
       <div className="menuBar">
         <nav>
-            <div className="menuItem">
-              <Link to="/Rooms">Rooms</Link>
-            </div>
-            <div className="menuItem">
-              <Link to="/CreateRooms">Create room</Link>
-            </div>
-            <div className="menuItem">
-              <Link to="/Bookings">Bookings</Link>
-            </div>
-            <div className="menuItem">
-              <Link to="/CreateBooking">Create booking</Link>
-            </div>
-            <div className="menuItem">
-              <Link to="/DeleteBooking">Delete booking</Link>
-            </div>
-            <div className="menuItem">
-              <Link to="/CreateUser">Create user</Link>
-            </div>
+          <div className="menuItem">
+            <Link to="/Rooms">Rooms</Link>
+          </div>
+          <div className="menuItem">
+            <Link to="/CreateRooms">Create room</Link>
+          </div>
+          <div className="menuItem">
+            <Link to="/Bookings">Bookings</Link>
+          </div>
+          <div className="menuItem">
+            <Link to="/CreateBooking">Create booking</Link>
+          </div>
+          <div className="menuItem">
+            <Link to="/DeleteBooking">Delete booking</Link>
+          </div>
+          <div className="menuItem">
+            <Link to="/CreateUser">Create user</Link>
+          </div>
+          <div className="menuItem">
+            <Link to="/IntroductionHooks">Introduction to hooks</Link>
+          </div>
         </nav>
 
         {/* A <Switch> looks through its children <Route>s and
@@ -69,6 +73,10 @@ function App() {
           <Route path="/CreateUser">
             <CreateUser />
           </Route>
+          <Route path="/IntroductionHooks">
+            <IntroductionHooks />
+          </Route>
+
         </Switch>
       </div>
     </Router>

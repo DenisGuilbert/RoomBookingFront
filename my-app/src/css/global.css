@@ -116,3 +116,13 @@
     border-radius: 5px;
     padding: 3px;
 }
+
+.divChild {}
+
+.divChild>* {
+    margin: 2px;
+}
+
+.ulDense {
+    display: inline-grid;
+}
