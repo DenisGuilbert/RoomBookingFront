@@ -1,5 +1,6 @@
 import './App.css';
 import "./css/global.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import {
   BrowserRouter as Router,
   Switch,
@@ -14,17 +15,12 @@ import CreateBooking from './components/Bookings/CreateBooking';
 import DeleteBooking from './components/Bookings/DeleteBooking';
 import CreateUser from './components/Users/CreateUser';
 import IntroductionHooks from './components/Hooks/IntroductionHooks';
+import {TotalHook} from './components/Hooks/TotalHook';
+import RoomListHook from './components/Hooks/RoomListHook';
 
 function App() {
+  
   return (
-    // <div className="App">
-    //   <Rooms />
-    //   <CreateRooms />
-    //   <Bookings />
-    //   <CreateBooking />
-    //   <DeleteBooking />
-    //   <CreateUser />
-    // </div>
 
     <Router>
       <div className="menuBar">
@@ -49,6 +45,13 @@ function App() {
           </div>
           <div className="menuItem">
             <Link to="/IntroductionHooks">Introduction to hooks</Link>
+          </div>
+
+          <div className="menuItem">
+            <Link to="/TotalHook"> Multiple hooks component </Link>
+          </div>
+          <div className="menuItem">
+            <Link to="/RoomListHook"> Room list with hooks </Link>
           </div>
         </nav>
 
@@ -75,6 +78,13 @@ function App() {
           </Route>
           <Route path="/IntroductionHooks">
             <IntroductionHooks />
+          </Route>
+
+          <Route path="/TotalHook">
+            <TotalHook />
+          </Route>
+          <Route path="/RoomListHook">
+            <RoomListHook />
           </Route>
 
         </Switch>

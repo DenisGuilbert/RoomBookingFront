@@ -126,3 +126,7 @@
 .ulDense {
     display: inline-grid;
 }
+
+.centerText {
+    text-align: center;
+}

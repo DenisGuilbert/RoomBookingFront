@@ -70,7 +70,4 @@ export default function IntroductionHooks() {
             </div>
         </div>
     );
-
-    //TODO : inspire of this : 
-    //https://github.com/blockmatic/hooks-architecture
 }
