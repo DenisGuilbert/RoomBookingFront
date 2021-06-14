@@ -15,13 +15,16 @@ import CreateBooking from './components/Bookings/CreateBooking';
 import DeleteBooking from './components/Bookings/DeleteBooking';
 import CreateUser from './components/Users/CreateUser';
 import IntroductionHooks from './components/Hooks/IntroductionHooks';
-import {TotalHook} from './components/Hooks/TotalHook';
+import { TotalHook } from './components/Hooks/TotalHook';
 import RoomListHook from './components/Hooks/RoomListHook';
+import OfferListHook from './components/Offers/Offers';
+import CreateOffer from './components/Offers/CreateOffer';
+import { TechnologiesList } from './components/Offers/TechnologiesList';
+import { ContractsList } from './components/Offers/ContractsList';
+import { FunctionsList } from './components/Offers/FunctionsList';
 
 function App() {
-  
   return (
-
     <Router>
       <div className="menuBar">
         <nav>
@@ -46,12 +49,26 @@ function App() {
           <div className="menuItem">
             <Link to="/IntroductionHooks">Introduction to hooks</Link>
           </div>
-
           <div className="menuItem">
             <Link to="/TotalHook"> Multiple hooks component </Link>
           </div>
           <div className="menuItem">
             <Link to="/RoomListHook"> Room list with hooks </Link>
+          </div>
+          <div className="menuItem">
+            <Link to="/OfferListHook"> Offer list with hooks </Link>
+          </div>
+          <div className="menuItem">
+            <Link to="/CreateOffer"> Create offer </Link>
+          </div>
+          <div className="menuItem">
+            <Link to="/TechnologiesList"> Technologies list </Link>
+          </div>
+          <div className="menuItem">
+            <Link to="/ContractsList"> Contracts list </Link>
+          </div>
+          <div className="menuItem">
+            <Link to="/FunctionsList"> Functions list </Link>
           </div>
         </nav>
 
@@ -79,14 +96,27 @@ function App() {
           <Route path="/IntroductionHooks">
             <IntroductionHooks />
           </Route>
-
           <Route path="/TotalHook">
             <TotalHook />
           </Route>
           <Route path="/RoomListHook">
             <RoomListHook />
           </Route>
-
+          <Route path="/OfferListHook">
+            <OfferListHook />
+          </Route>
+          <Route path="/CreateOffer">
+            <CreateOffer />
+          </Route>
+          <Route path="/TechnologiesList">
+            <TechnologiesList />
+          </Route>
+          <Route path="/ContractsList">
+            <ContractsList />
+          </Route>
+          <Route path="/FunctionsList">
+            <FunctionsList />
+          </Route>
         </Switch>
       </div>
     </Router>

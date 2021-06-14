@@ -28,13 +28,11 @@ export default function IntroductionHooks() {
         axios({
             "method": "GET",
             "url": "https://localhost:44387/Rooms",
-        })
-            .then((response) => {
-                setResponseData(response.data);
-            })
-            .catch((error) => {
-                console.log(error)
-            });
+        }).then((response) => {
+            setResponseData(response.data);
+        }).catch((error) => {
+            console.log(error)
+        });
     }, []);
 
     return (

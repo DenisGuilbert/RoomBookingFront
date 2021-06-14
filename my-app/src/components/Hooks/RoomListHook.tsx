@@ -8,7 +8,7 @@ export default function RoomListHook() {
     useEffect(() => {
         getRooms();
     });
-
+    
     function getRooms() {
         client.get('/Rooms').then((response) => {
             setRoomList(response.data);
@@ -17,7 +17,7 @@ export default function RoomListHook() {
             console.log(error)
         });
     }
-
+    
     return (
         <div>
             <Table striped bordered hover responsive size="sm">
