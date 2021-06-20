@@ -57,6 +57,7 @@ export default function CreateOffer() {
     }
 
     function handleSubmitButton(o) {
+        debugger;
         console.log(o);
         client.post("/Offers", {
             title: o.title,
@@ -196,7 +197,7 @@ export default function CreateOffer() {
                                 <label htmlFor="contract">Contrat * </label>
                             </div>
                             <div className="divFlexChildRight">
-                                <ContractsList name="idContract" onChange={onContractsChange} />
+                                <ContractsList name="idContract" onContractChange={onContractsChange} />
                             </div>
                         </div>
 

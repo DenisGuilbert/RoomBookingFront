@@ -111,9 +111,9 @@ function App() {
           <Route path="/TechnologiesList">
             <TechnologiesList />
           </Route>
-          <Route path="/ContractsList">
-            <ContractsList />
-          </Route>
+          {/* <Route path="/ContractsList">
+            <ContractsList name={""} onContractChange={} />
+          </Route> */}
           <Route path="/FunctionsList">
             <FunctionsList />
           </Route>
